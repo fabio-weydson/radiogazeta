@@ -1,4 +1,4 @@
-/*! 
+/*!
  * Roots v 2.0.0
  * Follow me @adanarchila at Codecanyon.net
  * URL: http://codecanyon.net/item/roots-phonegapcordova-multipurpose-hybrid-app/9525999
@@ -9,7 +9,7 @@
 
 (function(){
   'use strict';
- 
+
   var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio']);
 
   // Filter to convert HTML content to string by removing all HTML tags
@@ -21,7 +21,7 @@
   );
 
   app.controller('networkController', function($scope){
-    
+
     ons.ready(function(){
       StatusBar.styleBlackOpaque();
     });
@@ -31,17 +31,17 @@
 
       offlineMessage.show();
 
-      /* 
+      /*
        * With this line of code you can hide the modal in 8 seconds but the user will be able to use your app
-       * If you want to block the use of the app till the user gets internet again, please delete this line.       
+       * If you want to block the use of the app till the user gets internet again, please delete this line.
        */
 
-      setTimeout('offlineMessage.hide()', 8000);  
+      setTimeout('offlineMessage.hide()', 8000);
 
     }, false);
 
     document.addEventListener("online", function(){
-      // If you remove the "setTimeout('offlineMessage.hide()', 8000);" you must remove the comment for the line above      
+      // If you remove the "setTimeout('offlineMessage.hide()', 8000);" you must remove the comment for the line above
       // offlineMessage.hide();
     });
 
@@ -79,7 +79,7 @@
 
       }
     };
-  }]);    
+  }]);
 
 
 
@@ -88,7 +88,7 @@
   app.controller('newsController', [ '$http', '$scope', '$rootScope', function($http, $scope, $rootScope){
 
     // I'm using the same post type video, but you will need another custom post type for this one
-    $scope.yourAPI = 'http://dev.studio31.co/api/get_posts/?post_type=video'; 
+    $scope.yourAPI = 'http://dev.studio31.co/api/get_posts/?post_type=video';
     $scope.items = [];
     $scope.totalPages = 0;
     $scope.currentPage = 1;
@@ -99,7 +99,7 @@
 
     // Let's initiate this on the first Controller that will be executed.
     ons.ready(function() {
-      
+
       // Cache Images Setup
       // Set the debug to false before deploying your app
       ImgCache.options.debug = true;
@@ -119,13 +119,13 @@
 
 
     $scope.pullContent = function(){
-      
+
       $http.jsonp($scope.yourAPI+'&page='+$scope.pageNumber+'&callback=JSON_CALLBACK').success(function(response) {
 
         if($scope.pageNumber > response.pages){
 
           // hide the more news button
-          $('#moreButton').fadeOut('fast');  
+          $('#moreButton').fadeOut('fast');
 
         } else {
 
@@ -144,7 +144,7 @@
           if($scope.pageNumber == response.pages){
 
             // hide the more news button
-            $('#moreButton').fadeOut('fast'); 
+            $('#moreButton').fadeOut('fast');
 
           }
 
@@ -156,14 +156,14 @@
 
     $scope.getAllRecords = function(pageNumber){
 
-      $scope.isFetching = true;    
+      $scope.isFetching = true;
 
       if (window.localStorage.getItem($scope.localSavePrefix+"rootsLastPage") == null ) {
 
         $scope.pullContent();
 
       } else {
-        
+
         var now = new Date();
         var saved = new Date(window.localStorage.getItem($scope.localSavePrefix+"rootsDate"));
 
@@ -184,16 +184,16 @@
           window.localStorage.removeItem($scope.localSavePrefix+"rootsDate");
 
           $scope.pullContent();
-        
+
         } else {
-          
+
           $scope.lastSavedPage = window.localStorage.getItem($scope.localSavePrefix+"rootsLastPage");
 
           // If the page we want is greater than the last saved page, we need to pull content from the web
           if($scope.currentPage > $scope.lastSavedPage){
 
             $scope.pullContent();
-          
+
           // else if the page we want is lower than the last saved page, we have it on local Storage, so just show it.
           } else {
 
@@ -217,7 +217,7 @@
     };
 
     $scope.showPost = function(index){
-        
+
       $rootScope.postContent = $scope.items[index];
       $scope.ons.navigator.pushPage('post.html');
 
@@ -225,9 +225,9 @@
 
     $scope.nextPage = function(){
 
-      $scope.currentPage++; 
-      $scope.pageNumber = $scope.currentPage;                 
-      $scope.getAllRecords($scope.pageNumber);        
+      $scope.currentPage++;
+      $scope.pageNumber = $scope.currentPage;
+      $scope.getAllRecords($scope.pageNumber);
 
     }
 
@@ -235,7 +235,7 @@
 
   // This controller let us print the Post Content in the post.html template
   app.controller('postController', [ '$scope', '$rootScope', '$sce', function($scope, $rootScope, $sce){
-    
+
     $scope.item = $rootScope.postContent;
 
     $scope.renderHtml = function (htmlCode) {
@@ -246,9 +246,9 @@
         done: function(instance) {
             angular.element(instance.elements[0]).removeClass('is-loading').addClass('is-loaded');
         }
-    };    
+    };
 
-  }]);  
+  }]);
 
 
   // Radio Controller
@@ -256,9 +256,9 @@
   var isPlaying = false;
 
   app.controller('radioController', function($scope, $sce, ngAudio){
-    
-    $scope.radioHost = 'http://192.99.8.192'; // Replace this with your own radio stream URL
-    $scope.radioPort = '3536'; // Replace this with the port of your Radio Stream
+
+    $scope.radioHost = 'http://205.164.62.15'; // Replace this with your own radio stream URL
+    $scope.radioPort = '10084'; // Replace this with the port of your Radio Stream
     $scope.lastFMKey = 'ab68e9a71c1bb15efaa9c706b646dee4';
     $scope.lastFM = 'http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=1&api_key='+$scope.lastFMKey+'&track=';
 
@@ -272,18 +272,18 @@
 
     // Let's start the Shoutcast plugin to get the Song Name
     $.SHOUTcast({
-       host : '192.99.8.192', // Replace this with your own radio stream URL but remove the http
+       host : '205.164.62.15', // Replace this with your own radio stream URL but remove the http
        port : $scope.radioPort,
        interval : 40000, // Refresh interval in miliseconds is equal to 40 seconds.
        stream: 1, // Replace with your stream, default is 1.
        stats : function(){
           var songTitle = this.get('songtitle');
           var albumArt = '';
-          
+
           $.getJSON( $scope.lastFM+encodeURIComponent(songTitle), function( data ) {
             if(data.error){
               //console.log(data.message);
-              albumArt = 'images/radio/cover.png';    
+              albumArt = 'images/radio/cover.png';
             } else {
               //console.log(data); // delete this for production
               if( data.results!== undefined ){
@@ -292,9 +292,9 @@
                     albumArt = data.results.trackmatches.track.image[3]['#text'];
                   } else {
                     albumArt = 'images/radio/cover.png';
-                  }                  
+                  }
                 } else {
-                  albumArt = 'images/radio/cover.png'; 
+                  albumArt = 'images/radio/cover.png';
                 }
               }
             }
@@ -304,7 +304,7 @@
             });
 
           });
-          
+
           $scope.$apply(function(){
             $scope.radioOptions.songName = songTitle;
           });
@@ -312,16 +312,16 @@
 
     }).startStats();
 
-    if (radio!==null) {   
+    if (radio!==null) {
         $scope.radio = radio;
-        
+
         if(isPlaying){
           $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
         } else {
           $scope.buttonIcon = '<span class="ion-ios-play"></span>';
         }
     } else {
-      
+
       isPlaying = false;
         $scope.radio = ngAudio.load($scope.radioURL);
         radio = $scope.radio;
@@ -359,7 +359,7 @@
       $scope.buttonIcon = '<span class="ion-ios-play"></span>';
       $scope.radio = null;
       modal.show();
-      setTimeout('modal.hide()', 8000);       
+      setTimeout('modal.hide()', 8000);
 
     }, false);
 
@@ -389,4 +389,3 @@
 
 
 })();
-
