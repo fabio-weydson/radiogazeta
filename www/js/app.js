@@ -10,7 +10,7 @@
 (function(){
   'use strict';
 
-  var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio']);
+  var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio', 'angular-jwplayer']);
 
   // Filter to convert HTML content to string by removing all HTML tags
   app.filter('htmlToPlaintext', function() {
@@ -256,6 +256,29 @@
   var isPlaying = false;
 
   app.controller('radioController', function($scope, $sce, ngAudio){
+
+ $scope.options = {
+        file: "rtmp://wz4.dnip.com.br:1935/gazetacuiabahd/gazetacuiabahd.stream",
+        image: "http://wz4.dnip.com.br/gazetacuiabahd/gazetacuiabahd.stream/playlist.m3u8", // optionnal
+        height: 20,
+        width: 100,
+        autostart: true
+    };
+
+  // $scope.SayHello = function() {
+  //     jwplayer("player").setup({
+  //   sources: [{
+  //           file: "rtmp://wz4.dnip.com.br:1935/gazetacuiabahd/gazetacuiabahd.stream"
+  //       },{
+  //           file: "http://wz4.dnip.com.br/gazetacuiabahd/gazetacuiabahd.stream/playlist.m3u8"
+  //       }],
+  //       rtmp: {
+  //       bufferlength: 5    },
+  // height: 30,
+  //   width: 152,
+  // autostart: 'true'
+  //  });
+  // }
 
     $scope.radioHost = 'http://192.99.8.192'; // Replace this with your own radio stream URL
     $scope.radioPort = '3536'; // Replace this with the port of your Radio Stream
