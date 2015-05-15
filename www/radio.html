@@ -1,5 +1,26 @@
 <ons-navigator animation="slide" var="radioPage">  
-    
+
+<script type='text/javascript' src='http://900464851.r.cdn77.net/jwplayer6/jwplayer.js'></script>
+ <script>jwplayer.key="NrWBH1lhm4oLIrRsrNJ8POdHKK8rQjt7J76m8w=="</script>
+
+<div id="player">Carregando...</div>
+
+<script type="text/javascript">
+    jwplayer("player").setup({
+    sources: [{
+            file: "rtmp://wz4.dnip.com.br:1935/gazetacuiabahd/gazetacuiabahd.stream"
+        },{
+            file: "http://wz4.dnip.com.br/gazetacuiabahd/gazetacuiabahd.stream/playlist.m3u8"
+        }],
+        rtmp: {
+        bufferlength: 5    },
+  height: 30,
+    width: 152,
+  autostart: 'true'
+   });
+
+</script>
+
   <ons-page ng-controller="radioController">
     <ons-toolbar >
       <div class="left">
@@ -14,32 +35,43 @@
     <div class="details-content glass no-scroll">
       <div class="radiobox">
         <ons-row align="center">
-          <ons-col width="17%"></ons-col>
-          <ons-col width="66%" align="center">
-            <img class="rounded" ng-src="{{ radioOptions.albumArt }}">
-            <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>            
+          <ons-col width="13%"></ons-col>
+          <ons-col width="74%" align="center" id="display">
+          <div class="ball"></div>
+           <p class="song-title">{{ radioOptions.songName | limitTo: 32 }}</p>
+          <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>
+
+            <img  ng-src="{{ radioOptions.albumArt }}">
+            <ons-row align="center" id="controls">
+              <ons-col width="15%" align="center"><a href="#" class="botoes" ><span class="ion-ios-heart"></span></a></ons-col>
+              <ons-col width="15%" align="center"><a href="#" class="botoes" ><span class="ion-heart-broken"></span></a></ons-col>
+              <ons-col width="40%" align="center"><a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
+              <ons-col width="15%" align="center"><a href="#" class="botoes" ><span class="ion-share"></span></a></ons-col>
+              <ons-col width="15%" align="center"><a href="#" class="botoes"><span class="ion-ios-email"></span></a></ons-col>
+            </ons-row>
+            <!-- <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>   -->          
           </ons-col>
-          <ons-col width="17%"></ons-col>
+          <ons-col width="13%"></ons-col>
         </ons-row>        
         <ons-row>
-          <ons-col width="5%"></ons-col>
-          <ons-col width="90%" align="center">
-            <div style="height:27px;">
-              <p class="song-title">{{ radioOptions.songName | limitTo: 32 }}</p>
-            </div>
+          <ons-col width="13%"></ons-col>
+          <ons-col width="74%" align="center">
+          <div class="tocada"></div>
+          <div class="tocada"></div>
           </ons-col>
-          <ons-col width="5%"></ons-col>
+          <ons-col width="13%"></ons-col>
         </ons-row>
+
         <ons-row align="center">
           <ons-col width="32%"></ons-col>
           <ons-col width="36%" align="center">
-            <a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a>
+           <!--  <a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a> -->
           </ons-col>
           <ons-col width="32%"></ons-col>
         </ons-row>
       </div>
       <div class="bgbox">
-        <img src="images/radio/bg.jpg" class="bg">
+       <!--  <img src="images/radio/bg.jpg" class="bg"> -->
       </div>
     </div>
 

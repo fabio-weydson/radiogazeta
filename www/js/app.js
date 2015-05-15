@@ -257,8 +257,8 @@
 
   app.controller('radioController', function($scope, $sce, ngAudio){
 
-    $scope.radioHost = 'http://205.164.62.15'; // Replace this with your own radio stream URL
-    $scope.radioPort = '10084'; // Replace this with the port of your Radio Stream
+    $scope.radioHost = 'http://192.99.8.192'; // Replace this with your own radio stream URL
+    $scope.radioPort = '3536'; // Replace this with the port of your Radio Stream
     $scope.lastFMKey = 'ab68e9a71c1bb15efaa9c706b646dee4';
     $scope.lastFM = 'http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=1&api_key='+$scope.lastFMKey+'&track=';
 
@@ -272,8 +272,8 @@
 
     // Let's start the Shoutcast plugin to get the Song Name
     $.SHOUTcast({
-       host : '205.164.62.15', // Replace this with your own radio stream URL but remove the http
-       port : $scope.radioPort,
+       host : '192.99.8.192', // Replace this with your own radio stream URL but remove the http
+       port : '3536',
        interval : 40000, // Refresh interval in miliseconds is equal to 40 seconds.
        stream: 1, // Replace with your stream, default is 1.
        stats : function(){

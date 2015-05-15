@@ -17,7 +17,6 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
- 
 }
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -76,7 +75,7 @@ h6 {
   margin-top: -1px;
 }
 .page__background {
-  background-color: #E9E9EB;
+  background-color: #f9f9f9;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -394,11 +393,11 @@ h6 {
   height: 44px;
   padding-left: 0;
   padding-right: 0;
-  background: #F4F4F4;
+  background: #000;
   color: #fff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid #000;
   font-weight: 400;
   width: 100%;
   white-space: nowrap;
@@ -407,9 +406,15 @@ h6 {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .navigation-bar {
     border-bottom: none;
-  
-    background: #F4F4F4;
-}
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #000, #000 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #000, #000 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #000, #000 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #000, #000 50%, transparent 50%);
+  }
 }
 .navigation-bar__line-height {
   line-height: 44px;
@@ -443,7 +448,8 @@ h6 {
   float: left;
 }
 .navigation-bar__left {
-  width: 50px;
+  max-width: 50%;
+  width: 27%;
   text-align: left;
 }
 .navigation-bar__right {
@@ -463,9 +469,8 @@ h6 {
   line-height: 44px;
   font-size: 17px;
   font-weight: 500;
-  color: #989FAD;
+  color: #fff;
   margin: 0;
-  text-align: left;
   padding: 0;
   overflow: visible;
 }
@@ -1500,7 +1505,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   display: table;
   table-layout: fixed;
   position: absolute;
@@ -1510,11 +1515,10 @@ h6 {
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  min-height: 79px;
+  height: 49px;
+  background-color: #222;
   border-top: 1px solid rgba(0,0,0,0);
   width: 100%;
-  background-size: 78px 67px;
-  background: #292F34 url(../images/bg_menu.jpg?v=2);
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .tab-bar {
@@ -1542,7 +1546,6 @@ h6 {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-
 .tab-bar__item > input {
   position: absolute;
   overflow: hidden;
@@ -1564,10 +1567,7 @@ h6 {
 }
 .tab-bar__button {
   position: relative;
-  border: 0;
-  border-left: 1px solid #32393F;
-  border-right: 1px solid #22252A;
-  display: block;
+  display: inline-block;
   vertical-align: top;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -1584,6 +1584,7 @@ h6 {
   font: inherit;
   color: inherit;
   background: transparent;
+  border: none;
   line-height: normal;
   cursor: default;
   -webkit-user-select: none;
@@ -1591,12 +1592,11 @@ h6 {
   -ms-user-select: none;
   user-select: none;
   text-overflow: ellipsis;
-  font-size: 13px;
   white-space: nowrap;
   overflow: hidden;
   text-decoration: none;
   padding: 0;
-  height: 72px;
+  height: 49px;
   letter-spacing: 0;
   color: #8a8a8a;
   text-shadow: 0 1px none;
@@ -1607,9 +1607,8 @@ h6 {
   border-top: none;
   width: 100%;
   font-weight: 400;
-  line-height: 16px;
+  line-height: 49px;
 }
-
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .tab-bar__button {
     border-top: none;
@@ -1643,7 +1642,7 @@ h6 {
   padding: 0;
 }
 .tab-bar__button {
-   -webkit-filter: grayscale(1) opacity(0.6);
+  color: #8a8a8a;
 }
 :checked + .tab-bar__button {
   color: #fff;
@@ -1651,11 +1650,9 @@ h6 {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-top: none;
-  -webkit-filter: grayscale(0) opacity(1);
 }
 :checked + .tab-bar__button > .tab-bar__icon {
   color: #fff;
-
 }
 .tab-bar__button:disabled {
   opacity: 0.3;
