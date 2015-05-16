@@ -4,11 +4,12 @@
 <ons-navigator animation="slide" var="radioPage">  
 
   <ons-page ng-controller="radioController">
-
+<jwplayer player-id="myplayer" setup="options" style="  visibility: hidden;"></jwplayer> 
     <ons-toolbar >
       <div class="left">
       </div>
       <div class="center">
+        Ao vivo  
       </div>
       <div class="right" ng-show="isFetching">
       </div>
@@ -27,7 +28,7 @@
             <ons-row align="center" id="controls">
               <ons-col width="20%" align="center"><a href="#" class="botoes" ><span class="ion-ios-heart"></span></a></ons-col>
               <ons-col width="15%" align="center"><a href="#" class="botoes" ><span class="ion-heart-broken"></span></a></ons-col>
-              <ons-col width="30%" align="center"><a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
+              <ons-col width="30%" align="center"><a href="#" id="btn-play" ng-click="sstartRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
               <ons-col width="15%" align="center"><a href="#" class="botoes" ><span class="ion-share"></span></a></ons-col>
               <ons-col width="20%" align="center"><a href="#" class="botoes"><span class="ion-ios-email"></span></a></ons-col>
             </ons-row>
