@@ -280,8 +280,8 @@
   //  });
   // }
 
-    $scope.radioHost = 'http://sc4.dnip.com.br'; // Replace this with your own radio stream URL
-    $scope.radioPort = '13155'; // Replace this with the port of your Radio Stream
+    $scope.radioHost = 'http://192.99.8.192'; // Replace this with your own radio stream URL
+    $scope.radioPort = '3536'; // Replace this with the port of your Radio Stream
     $scope.lastFMKey = 'ab68e9a71c1bb15efaa9c706b646dee4';
     $scope.lastFM = 'http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=1&api_key='+$scope.lastFMKey+'&track=';
 
