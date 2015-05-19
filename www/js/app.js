@@ -265,23 +265,18 @@
         autostart: true
     };
 
-  // $scope.SayHello = function() {
-  //     jwplayer("player").setup({
-  //   sources: [{
-  //           file: "rtmp://wz4.dnip.com.br:1935/gazetacuiabahd/gazetacuiabahd.stream"
-  //       },{
-  //           file: "http://wz4.dnip.com.br/gazetacuiabahd/gazetacuiabahd.stream/playlist.m3u8"
-  //       }],
-  //       rtmp: {
-  //       bufferlength: 5    },
-  // height: 30,
-  //   width: 152,
-  // autostart: 'true'
-  //  });
-  // }
+ // $scope.teste = function () {
+ //  var titulo = 'ss';
+        
+          
+ //         }).done(function(data) {
+ //   titulo = data;
+ //  });
+         
+ //      };
 
-    $scope.radioHost = 'http://192.99.8.192'; // Replace this with your own radio stream URL
-    $scope.radioPort = '3536'; // Replace this with the port of your Radio Stream
+    $scope.radioHost = 'http://sc6.dnip.com.br'; // Replace this with your own radio stream URL
+    $scope.radioPort = '13250'; // Replace this with the port of your Radio Stream
     $scope.lastFMKey = 'ab68e9a71c1bb15efaa9c706b646dee4';
     $scope.lastFM = 'http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=1&api_key='+$scope.lastFMKey+'&track=';
 
@@ -290,7 +285,7 @@
 
     $scope.radioOptions = {
       albumArt: 'images/radio/cover.png',
-      songName: ''
+      songName: '',
     }
 
     // Let's start the Shoutcast plugin to get the Song Name
@@ -299,16 +294,24 @@
        port : '3536',
        interval : 40000, // Refresh interval in miliseconds is equal to 40 seconds.
        stream: 1, // Replace with your stream, default is 1.
+       
        stats : function(){
-          var songTitle = this.get('songtitle');
+        var songTitle = '';
           var albumArt = '';
-
-          $.getJSON( $scope.lastFM+encodeURIComponent(songTitle), function( data ) {
+          var URL = '';
+           $.get('http://localhost/aplicativos/radiogazeta/www/current_song.php', function( data ) {
+            songTitle = data;
+            console.log(data)
+               $scope.$apply(function(){
+            $scope.radioOptions.songName = songTitle;
+          });
+            URL = $scope.lastFM+encodeURIComponent(songTitle);
+         
+          $.getJSON( URL, function( data ) {
             if(data.error){
-              //console.log(data.message);
               albumArt = 'images/radio/cover.png';
             } else {
-              //console.log(data); // delete this for production
+            //  console.log(data); // delete this for production
               if( data.results!== undefined ){
                 if(data.results.trackmatches !="\n" ){
                   if(data.results.trackmatches.track.image !== undefined){
@@ -327,10 +330,9 @@
             });
 
           });
-
-          $scope.$apply(function(){
-            $scope.radioOptions.songName = songTitle;
           });
+
+       
        }
 
     }).startStats();
@@ -357,6 +359,7 @@
       $scope.startRadio = function(){
 
         if(!isPlaying){
+         
           // Let's play it
           isPlaying = true;
         $scope.radio.play();
