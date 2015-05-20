@@ -451,11 +451,11 @@
     $scope.shareMusica = function () {
 
         var subject = 'Estou ouvindo';
-        var message = $scope.radioOptions.songName+"  Via App ofical...";
-        message += message.replace(/(<([^>]+)>)/ig,"");
+        var message = $scope.radioOptions.songName+" Via App ofical...";
         var imagem = $scope.radioOptions.albumArt;
         var link = 'http://fm.gazetadigital.com.br';
-        window.plugins.socialsharing.share(message, subject, img, link);
+        alert(message);
+        window.plugins.socialsharing.share(message, subject, imagem, link);
   
     }
 
