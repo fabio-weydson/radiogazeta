@@ -307,7 +307,6 @@
       var Artista = '';
       var Musica = '';
       $.get('http://184.172.104.3/~fmgazeta/player/current_song.php', function( data ) {
-        data = "Madonna - LIke a virgin";
             var faixa = data.split(" - ");
 
             if(faixa[1]!=undefined) {
