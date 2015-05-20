@@ -427,11 +427,12 @@ map.fullscreen {
   width: 100%;
   height: 100%;
   z-index: 2;
-  top: 10%;
+  top: 8%;
 }
 .radiobox img {
   width: 100%;
-  border-radius: 9px 9px 0 0;
+  /* border-radius: 9px 9px 0 0; */
+  margin-top: 10px;
 }
 #stream-time {
   color: #fff;
@@ -473,6 +474,9 @@ a.botoes {
   color:#353D43;
   font-size: 20px;
   line-height: normal;
+}
+a.botoes.active span {
+    color: #FF0493;
 }
 #btn-play {
   display: block;

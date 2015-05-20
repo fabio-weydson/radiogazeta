@@ -7,9 +7,11 @@
 <!-- <jwplayer player-id="myplayer" setup="options"></jwplayer>  -->
     <ons-toolbar >
       <div class="left">
+        <img src="images/radio/logo_xx.png" style="  width: 36px;
+  margin: 7px;">
       </div>
       <div class="center">
-        Ao vivo
+        Gazeta Cuiabá
       </div>
       <div class="right" ng-show="isFetching">
       </div>
@@ -26,10 +28,10 @@
 
             <img  ng-src="{{ radioOptions.albumArt }}">
             <ons-row align="center" id="controls">
-              <ons-col width="20%" align="center"><a href="#" class="botoes" ><span class="ion-ios-heart"></span></a></ons-col>
-              <ons-col width="15%" align="center"><a href="#" class="botoes" ><span class="ion-heart-broken"></span></a></ons-col>
+              <ons-col width="20%" align="center"><a href="#" class="botoes curtir" ng-click="curtir()"><span class="ion-ios-heart"></span></a></ons-col>
+              <ons-col width="15%" align="center"><a href="#" class="botoes descurtir" ng-click="curtir()"><span class="ion-heart-broken"></span></a></ons-col>
               <ons-col width="30%" align="center"><a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
-              <ons-col width="15%" align="center"><a href="#" class="botoes" ><span class="ion-share"></span></a></ons-col>
+              <ons-col width="15%" align="center"><a href="#" class="botoes" ng-click="shareMusica()" ><span class="ion-share"></span></a></ons-col>
               <ons-col width="20%" align="center"><a href="#" class="botoes"><span class="ion-ios-email"></span></a></ons-col>
             </ons-row>
             <!-- <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>   -->          

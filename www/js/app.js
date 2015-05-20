@@ -240,6 +240,7 @@
 
     $scope.renderHtml = function (htmlCode) {
       return $sce.trustAsHtml(htmlCode);
+
     };
 
     $scope.imgLoadedEvents = {
@@ -257,23 +258,6 @@
 
   app.controller('radioController', function($scope, $sce, ngAudio){
 
- $scope.options = {
-        file: "rtmp://wz4.dnip.com.br:1935/gazetacuiabahd/gazetacuiabahd.stream",
-        image: "http://wz4.dnip.com.br/gazetacuiabahd/gazetacuiabahd.stream/playlist.m3u8", // optionnal
-        height: 20,
-        width: 100,
-        autostart: true
-    };
-
- // $scope.teste = function () {
- //  var titulo = 'ss';
-        
-          
- //         }).done(function(data) {
- //   titulo = data;
- //  });
-         
- //      };
 
     $scope.radioHost = 'http://sc6.dnip.com.br'; // Replace this with your own radio stream URL
     $scope.radioPort = '13250'; // Replace this with the port of your Radio Stream
@@ -288,55 +272,142 @@
       songName: '',
     }
 
-    // Let's start the Shoutcast plugin to get the Song Name
-    $.SHOUTcast({
-       host : '192.99.8.192', // Replace this with your own radio stream URL but remove the http
-       port : '3536',
-       interval : 40000, // Refresh interval in miliseconds is equal to 40 seconds.
-       stream: 1, // Replace with your stream, default is 1.
-       
-       stats : function(){
-        var songTitle = '';
-          var albumArt = '';
-          var URL = '';
-           $.get('http://localhost/aplicativos/radiogazeta/www/current_song.php', function( data ) {
-            songTitle = data;
-            console.log(data)
-               $scope.$apply(function(){
-            $scope.radioOptions.songName = songTitle;
-          });
-            URL = $scope.lastFM+encodeURIComponent(songTitle);
-         
-          $.getJSON( URL, function( data ) {
-            if(data.error){
-              albumArt = 'images/radio/cover.png';
-            } else {
-            //  console.log(data); // delete this for production
-              if( data.results!== undefined ){
-                if(data.results.trackmatches !="\n" ){
-                  if(data.results.trackmatches.track.image !== undefined){
-                    albumArt = data.results.trackmatches.track.image[3]['#text'];
-                  } else {
-                    albumArt = 'images/radio/cover.png';
-                  }
-                } else {
-                  albumArt = 'images/radio/cover.png';
-                }
-              }
+    $scope.ExisteTexto = function (str, substrings) {
+        for (var i = 0; i != substrings.length; i++) {
+           var substring = substrings[i];
+           if (str.indexOf(substring) != - 1) {
+             return substring;
+           }
+        }
+        return null; 
+    }
+    $scope.limpa_str = function(str) {
+        str = str.replace(/^\s+|\s+$/g, ''); // trim
+        str = str.toLowerCase();
+        
+        // remove accents, swap ñ for n, etc
+        var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        var to   = "aaaaeeeeiiiioooouuuunc------";
+        for (var i=0, l=from.length ; i<l ; i++) {
+          str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+
+        str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+        .replace('  ', '+') // remove invalid chars
+         .replace('-', '') // remove invalid chars
+         .replace(' ', '+'); // remove invalid chars
+        return str;
+    }
+
+
+
+
+    $scope.RefreshFaixa = function(){
+      var songTitle = '';
+      var Artista = '';
+      var Musica = '';
+      $.get('http://184.172.104.3/~fmgazeta/player/current_song.php', function( data ) {
+        data = "Madonna - LIke a virgin";
+            var faixa = data.split(" - ");
+
+            if(faixa[1]!=undefined) {
+               Artista = faixa[1]+' - ';
+            }
+            if(faixa[0]!=undefined) {
+               Musica = faixa[0];
             }
 
-            $scope.$apply(function(){
-              $scope.radioOptions.albumArt = albumArt;
-            });
+            songTitle = Artista+Musica;
+            console.log(songTitle)
 
-          });
-          });
+          }).done(function(data){
+
+                $scope.$apply(function(){
+                  $scope.radioOptions.songName = songTitle;
+                 });
+
+              var result =  $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "VH", "FM"]);
+               if(result!=null) {
+                    $scope.$apply(function(){
+                    $scope.radioOptions.albumArt = 'images/radio/cover.png';
+                    });
+               } else {
+              var URLText = $scope.limpa_str(Artista);
+                  $scope.$apply(function(){
+                  $scope.radioOptions.albumArt = 'http://184.172.104.3/~fmgazeta/player/cover.php?h=250&filename='+URLText;
+                    });
+               }
+              
+                
+
+          })
+    }
+    setTimeout($scope.RefreshFaixa, 1000);
+    setInterval($scope.RefreshFaixa, 40000);
+
+ // $scope.teste = function () {
+ //  var titulo = 'ss';
+        
+          
+ //         }).done(function(data) {
+ //   titulo = data;
+ //  });
+         
+ //      };
+
+    // // Let's start the Shoutcast plugin to get the Song Name
+    // $.SHOUTcast({
+    //    host : '192.99.8.192', // Replace this with your own radio stream URL but remove the http
+    //    port : '3536',
+    //    interval : 40000, // Refresh interval in miliseconds is equal to 40 seconds.
+    //    stream: 1, // Replace with your stream, default is 1.
+       
+    //    stats : function(){
+    //     var songTitle = '';
+    //       var albumArt = '';
+    //       var URL = '';
+    //        $.get('http://localhost/aplicativos/radiogazeta/www/current_song.php', function( data ) {
+    //         var faixa = data.split(" - ");
+    //         songTitle = faixa[1]+"-"+faixa[0];
+    //            $scope.$apply(function(){
+    //         $scope.radioOptions.songName = songTitle;
+    //       });
+    //         URL = $scope.lastFM+encodeURIComponent(songTitle);
+    //         console.log(URL);
+         
+    //       $.getJSON( URL, function( data ) {
+    //         if(data.error){
+    //           albumArt = 'images/radio/cover.png';
+    //         } else {
+    //          console.log(data); // delete this for production
+    //           if( data.results!== undefined ){
+    //             if(data.results.trackmatches !="\n" ){
+    //               if(data.results.trackmatches.track.image !== undefined){
+    //                 albumArt = data.results.trackmatches.track.image[3]['#text'];
+    //               } else {
+    //                 albumArt = 'images/radio/cover.png';
+    //               }
+    //             } else {
+    //               albumArt = 'images/radio/cover.png';
+    //             }
+    //           }
+    //         }
+
+    //         $scope.$apply(function(){
+    //           $scope.radioOptions.albumArt = albumArt;
+    //         });
+
+    //       });
+    //       });
 
        
-       }
+    //    }
 
-    }).startStats();
-
+    // }).startStats();
+  
+    $scope.curtir = function() {
+        $('.curtir').toggleClass('active');
+    }
     if (radio!==null) {
         $scope.radio = radio;
 
@@ -376,6 +447,18 @@
         }
 
       }
+
+
+    $scope.shareMusica = function () {
+
+        var subject = 'Estou ouvindo';
+        var message = $scope.radioOptions.songName+"  Via App ofical...";
+        message += message.replace(/(<([^>]+)>)/ig,"");
+        var imagem = $scope.radioOptions.albumArt;
+        var link = 'http://fm.gazetadigital.com.br';
+        window.plugins.socialsharing.share(message, subject, img, link);
+  
+    }
 
       // Check if is Offline
     document.addEventListener("offline", function(){
