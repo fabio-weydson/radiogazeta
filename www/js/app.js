@@ -256,7 +256,7 @@
   var radio = null;
   var isPlaying = false;
 
-  app.controller('radioController', function($scope, $sce, ngAudio){
+  app.controller('radioController', function($scope, $sce, ngAudio, $timeout){
 
 
     $scope.radioHost = 'http://sc6.dnip.com.br'; // Replace this with your own radio stream URL
@@ -303,6 +303,7 @@
 
 
     $scope.RefreshFaixa = function(){
+      alert('atualizou!');
       var songTitle = '';
       var Artista = '';
       var Musica = '';
@@ -344,9 +345,8 @@
           })
     }
     setTimeout($scope.RefreshFaixa, 1000);
-    setInterval($scope.RefreshFaixa, 40000);
-    setInterval(function(){ alert("Hello"); }, 4000);
-
+    //setInterval($scope.RefreshFaixa, 40000);
+     $timeout($scope.RefreshFaixa, 20000);
  // $scope.teste = function () {
  //  var titulo = 'ss';
         
