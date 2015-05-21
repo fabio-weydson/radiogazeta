@@ -306,7 +306,9 @@
       var songTitle = '';
       var Artista = '';
       var Musica = '';
-      $.get('http://184.172.104.3/~fmgazeta/player/current_song.php', function( data ) {
+      var d = new Date();
+      var n = d.getSeconds();
+      $.get('http://184.172.104.3/~fmgazeta/player/current_song.php?v='+n, function( data ) {
             var faixa = data.split(" - ");
 
             if(faixa[1]!=undefined) {
@@ -405,7 +407,12 @@
     // }).startStats();
   
     $scope.curtir = function() {
-        $('.curtir').toggleClass('active');
+      $('.descurtir').removeClass('active');
+        $('.curtir').addClass('active');
+    }
+     $scope.descurtir = function() {
+       $('.curtir').removeClass('active');
+        $('.descurtir').addClass('active');
     }
     if (radio!==null) {
         $scope.radio = radio;
@@ -429,7 +436,7 @@
       $scope.startRadio = function(){
 
         if(!isPlaying){
-         
+          
           // Let's play it
           isPlaying = true;
         $scope.radio.play();
@@ -452,7 +459,8 @@
 
         var subject = 'Estou ouvindo';
         var message = $scope.radioOptions.songName+" Via App ofical...";
-        var imagem = $scope.radioOptions.albumArt;
+        //var imagem = $scope.radioOptions.albumArt;
+        var imagem = '';
         var link = 'http://fm.gazetadigital.com.br';
         alert(message);
         window.plugins.socialsharing.share(message, subject, imagem, link);

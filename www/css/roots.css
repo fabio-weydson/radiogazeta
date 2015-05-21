@@ -441,9 +441,9 @@ map.fullscreen {
   line-height: 24px;
   margin: 8px 0 0 0;
   width: 100%;
-  background: #363D43;
-  display: none;
+  background: rgba(54, 61, 67, 0.85);
   position: absolute;
+  top: 33px;
 }
 .song-title {
   color: #fff;
