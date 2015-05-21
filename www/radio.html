@@ -23,10 +23,10 @@
           <ons-col width="13%"></ons-col>
           <ons-col width="74%" align="center" id="display">
           <div class="ball"></div>
-           <p class="song-title">{{ radioOptions.songName | limitTo: 32 }}</p>
+           <p class="song-title"><span class="titulo">{{ radioOptions.Musica | limitTo: 32 }}</span><span class="artista">{{ radioOptions.Artista | limitTo: 32 }}</span></p>
           <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>
 
-            <img  ng-src="{{ radioOptions.albumArt }}">
+            <span class="capa"><img  ng-src="{{ radioOptions.albumArt }}"></span>
             <ons-row align="center" id="controls">
               <ons-col width="20%" align="center"><a href="#" class="botoes curtir" ng-click="curtir()"><span class="ion-ios-heart"></span></a></ons-col>
               <ons-col width="15%" align="center"><a href="#" class="botoes descurtir" ng-click="descurtir()"><span class="ion-heart-broken"></span></a></ons-col>
@@ -56,7 +56,7 @@
         </ons-row>
       </div>
       <div class="bgbox">
-       <!--  <img src="images/radio/bg.jpg" class="bg"> -->
+        <img ng-src="{{ radioOptions.albumArt }}" class="bg">
       </div>
     </div>
 

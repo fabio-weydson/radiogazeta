@@ -270,6 +270,8 @@
     $scope.radioOptions = {
       albumArt: 'images/radio/cover.png',
       songName: '',
+       Artista: '',
+        Musica: ''
     }
 
     $scope.ExisteTexto = function (str, substrings) {
@@ -306,25 +308,29 @@
       var songTitle = '';
       var Artista = '';
       var Musica = '';
-      var d = new Date();
-      var n = d.getSeconds();
-      $.get('http://184.172.104.3/~fmgazeta/player/current_song.php?v='+n, function( data ) {
+      //var d = new Date();
+      var n = Math.floor(Math.random() * 999) + 1;
+      //var URLCurrentSong = 'http://localhost/aplicativos/current_song.php';
+      var URLCurrentSong = 'http://184.172.104.3/~fmgazeta/player/current_song.php?v='+n;
+      $.get(URLCurrentSong, function( data ) {
+           // data = "Like a virgin - Madonna";
             var faixa = data.split(" - ");
 
             if(faixa[1]!=undefined) {
-               Artista = faixa[1]+' - ';
+               Artista = faixa[1];
             }
             if(faixa[0]!=undefined) {
                Musica = faixa[0];
             }
 
-            songTitle = Artista+Musica;
-            console.log(songTitle)
+            //songTitle = Artista+Musica;
+            //console.log(Musica+Artista)
 
           }).done(function(data){
 
                 $scope.$apply(function(){
-                  $scope.radioOptions.songName = songTitle;
+                  $scope.radioOptions.Artista = Artista;
+                  $scope.radioOptions.Musica = Musica;
                  });
 
               var result =  $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "VH", "FM"]);
@@ -334,9 +340,15 @@
                     });
                } else {
               var URLText = $scope.limpa_str(Artista);
+              var URLCover = 'http://184.172.104.3/~fmgazeta/player/cover.php?h=250&filename='+URLText;
+              //var URLCover = 'http://localhost/gazeta/novo/player/cover.php?h=250&filename='+URLText;
                   $scope.$apply(function(){
-                  $scope.radioOptions.albumArt = 'http://184.172.104.3/~fmgazeta/player/cover.php?h=250&filename='+URLText;
+                  $scope.radioOptions.albumArt = URLCover;
+                  $("span.capa img").error(function () { 
+                     $scope.radioOptions.albumArt = 'images/radio/cover.png';
+                  });
                     });
+
                }
               
                 
@@ -344,17 +356,7 @@
           })
     }
     setTimeout($scope.RefreshFaixa, 1000);
-    //setInterval($scope.RefreshFaixa, 40000);
         $interval( function(){ $scope.RefreshFaixa(); }, 40000);
- // $scope.teste = function () {
- //  var titulo = 'ss';
-        
-          
- //         }).done(function(data) {
- //   titulo = data;
- //  });
-         
- //      };
 
     // // Let's start the Shoutcast plugin to get the Song Name
     // $.SHOUTcast({
