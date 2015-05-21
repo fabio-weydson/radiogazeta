@@ -443,6 +443,7 @@
 
         $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
         $scope.isFetching = true;
+        $scope.RefreshFaixa();
 
         } else {
           // Let's pause it
