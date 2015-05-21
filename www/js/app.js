@@ -346,7 +346,7 @@
     }
     setTimeout($scope.RefreshFaixa, 1000);
     //setInterval($scope.RefreshFaixa, 40000);
-     $timeout($scope.RefreshFaixa, 20000);
+       $timeout( function(){ $scope.RefreshFaixa(); }, 10000);
  // $scope.teste = function () {
  //  var titulo = 'ss';
         
