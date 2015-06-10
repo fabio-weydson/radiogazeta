@@ -310,8 +310,8 @@
       var Musica = '';
       //var d = new Date();
       var n = Math.floor(Math.random() * 999) + 1;
-      //var URLCurrentSong = 'http://localhost/aplicativos/current_song.php';
-      var URLCurrentSong = 'http://184.172.104.3/~fmgazeta/player/current_song.php?v='+n;
+      var URLCurrentSong = 'http://localhost/aplicativos/current_song.php';
+      //var URLCurrentSong = 'http://184.172.104.3/~fmgazeta/player/current_song.php?v='+n;
       $.get(URLCurrentSong, function( data ) {
            // data = "Like a virgin - Madonna";
             var faixa = data.split(" - ");
@@ -323,7 +323,7 @@
                Musica = faixa[0];
             }
 
-            //songTitle = Artista+Musica;
+            songTitle = Artista+' '+Musica;
             //console.log(Musica+Artista)
 
           }).done(function(data){
@@ -333,20 +333,21 @@
                   $scope.radioOptions.Musica = Musica;
                  });
 
-              var result =  $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "VH", "FM"]);
+              var result =  $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "gazeta fm", "VH", "FM","2015"]);
                if(result!=null) {
                     $scope.$apply(function(){
-                    $scope.radioOptions.albumArt = 'images/radio/cover.png';
+                    $scope.radioOptions.albumArt = 'images/radio/logo_grande.png';
                     });
                } else {
               var URLText = $scope.limpa_str(Artista);
-              var URLCover = 'http://184.172.104.3/~fmgazeta/player/cover.php?h=250&filename='+URLText;
-              //var URLCover = 'http://localhost/gazeta/novo/player/cover.php?h=250&filename='+URLText;
+              //var URLCover = 'http://184.172.104.3/~fmgazeta/player/cover.php?h=250&filename='+URLText;
+              var URLCover = 'http://localhost/gazeta/novo/player/cover.php?h=250&filename='+URLText;
                   $scope.$apply(function(){
                   $scope.radioOptions.albumArt = URLCover;
                   $("span.capa img").error(function () { 
                      $scope.radioOptions.albumArt = 'images/radio/cover.png';
                   });
+                     
                     });
 
                }

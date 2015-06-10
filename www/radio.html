@@ -20,23 +20,23 @@
     <div class="details-content glass no-scroll">
       <div class="radiobox">
         <ons-row align="center">
-          <ons-col width="13%"></ons-col>
-          <ons-col width="74%" align="center" id="display">
+          <ons-col width="20%"></ons-col>
+          <ons-col width="60%" align="center" id="display">
           <div class="ball"></div>
            <p class="song-title"><span class="titulo">{{ radioOptions.Musica | limitTo: 32 }}</span><span class="artista">{{ radioOptions.Artista | limitTo: 32 }}</span></p>
           <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>
 
             <span class="capa"><img  ng-src="{{ radioOptions.albumArt }}"></span>
             <ons-row align="center" id="controls">
-              <ons-col width="20%" align="center"><a href="#" class="botoes curtir" ng-click="curtir()"><span class="ion-ios-heart"></span></a></ons-col>
-              <ons-col width="15%" align="center"><a href="#" class="botoes descurtir" ng-click="descurtir()"><span class="ion-heart-broken"></span></a></ons-col>
-              <ons-col width="30%" align="center"><a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
-              <ons-col width="15%" align="center"><a href="#" class="botoes" ng-click="shareMusica()" ><span class="ion-share"></span></a></ons-col>
-              <ons-col width="20%" align="center"><a href="#" class="botoes"><span class="ion-ios-email"></span></a></ons-col>
+              <ons-col width="18%" align="center"><a href="#" class="botoes curtir" ng-click="curtir()"><span class="ion-ios-heart"></span></a></ons-col>
+              <ons-col width="18%" align="center"><a href="#" class="botoes descurtir" ng-click="descurtir()"><span class="ion-heart-broken"></span></a></ons-col>
+              <ons-col width="28%" align="center"><a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
+              <ons-col width="18%" align="center"><a href="#" class="botoes" ng-click="shareMusica()" ><span class="ion-share"></span></a></ons-col>
+              <ons-col width="18%" align="center"><a href="#" class="botoes"><span class="ion-ios-email"></span></a></ons-col>
             </ons-row>
             <!-- <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>   -->          
           </ons-col>
-          <ons-col width="13%"></ons-col>
+          <ons-col width="20%"></ons-col>
         </ons-row>        
         <ons-row>
           <ons-col width="13%"></ons-col>

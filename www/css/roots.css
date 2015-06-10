@@ -441,16 +441,16 @@ map.fullscreen {
 #stream-time {
   color: #fff;
   text-align: right;
-  font-size: 10px;
+  font-size: 0.5em;
   line-height: 17px;
   width: 20%;
   right: 4px;
   position: absolute;
-  top: 14px;
+  top: 13px;
 }
 .song-title {
   color: #fff;
-  font-size: 14px;
+  font-size: 0.7em;
   line-height: 16px;
   margin-bottom: 0;
   background: #363D43;
@@ -587,7 +587,11 @@ img.bg {
   right: 0;
   position: fixed;
   z-index: -2;
-  -webkit-filter: blur(3px) opacity(.5);
+  -webkit-filter: blur(3px);    
+  -moz-filter: blur(3px);    
+  -o-filter: blur(3px);    
+  -ms-filter: blur(3px);
+  /* IE 8 */    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";      /* IE 5-7 */    filter: alpha(opacity=50);      /* Netscape */    -moz-opacity: 0.5;      /* Safari 1.x */    -khtml-opacity: 0.5;      /* Good browsers */    opacity: 0.5;
 }
 .button--clean {
   padding: 0;
@@ -1475,12 +1479,18 @@ ons-row#controls {
     background-size: auto 100%;
     margin-top:7%;
 }
-span.titulo {}
+span.titulo {
+    height: 16px;
+    overflow: hidden;
+    display: block;
+}
 
 span.artista {
     display: block;
-    font-size: 11px;
+    font-size: 0.7em;
     color: #A2B0BD;
+    overflow: hidden;
+    height: 14px;
 }
 span.capa img {
     min-height: 1px;
