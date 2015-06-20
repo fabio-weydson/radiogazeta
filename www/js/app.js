@@ -311,9 +311,7 @@ app.directive('fadeIn', function($timeout){
 
 
 
-    $scope.RefreshFaixa = function(){
-
-      console.log('refresh:'+window.localStorage.getItem('lastradio'));
+    $scope.RefreshFaixa = function(){      
       var songTitle = '';
       var Artista = '';
       var Musica = '';
@@ -376,7 +374,7 @@ app.directive('fadeIn', function($timeout){
     var radio_ativa = window.localStorage.getItem('lastradio');
     var autoplay = window.localStorage.getItem('autoplay');
     var ip_full = $scope.radios_arr[radio_ativa].ip;
-    
+    alert(ip_full);
 
     $scope.radio_ativa = radio_ativa;
     $scope.radioTitulo = $scope.radios_arr[radio_ativa].title.toUpperCase();
