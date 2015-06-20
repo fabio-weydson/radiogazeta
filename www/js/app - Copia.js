@@ -23,7 +23,7 @@
   app.controller('networkController', function($scope){
 
     ons.ready(function(){
-      $scope.ons.navigator.pushPage('radio2.html',{title : 'title'});
+      $scope.ons.navigator.pushPage('radio.html',{title : 'title'});
       StatusBar.styleBlackOpaque();
     });
 
@@ -277,7 +277,7 @@ app.directive('fadeIn', function($timeout){
   var radio = null;
   var isPlaying = false;
 
-  app.controller('radioController', function($scope, $sce, ngAudio, $interval,$timeout){
+  app.controller('radioController', function($scope, $sce, ngAudio, $interval){
 
      $scope.radios_arr = [
         {
@@ -311,7 +311,7 @@ app.directive('fadeIn', function($timeout){
 
     $scope.RefreshFaixa = function(){
 
-      console.log('refresh:'+window.localStorage.getItem('lastradio'));
+      //alert('refresh:'+window.localStorage.getItem('lastradio'));
       var songTitle = '';
       var Artista = '';
       var Musica = '';
@@ -354,11 +354,11 @@ app.directive('fadeIn', function($timeout){
        $scope.buttonIcon = '<img src="images/load.gif">';
         var radioIP =  $scope.radios_arr[idRadio].ip;
         window.localStorage.setItem('lastradio', $scope.radios_arr[idRadio].id);    
-        window.localStorage.setItem('autoplay', true);    
-        //$scope.ReloadRadio('sim');
-        location.reload(); 
-        //$scope.radio.stop();
+       //location.reload(); 
+       //$scope.radio.stop();
+        $scope.ReloadRadio('sim');
         return false;
+        
     } 
 
    
@@ -370,11 +370,9 @@ app.directive('fadeIn', function($timeout){
           window.localStorage.setItem('lastradio', $scope.radios_arr[0].id);    
     }
 
-  $scope.ReloadRadio = function(){
+  $scope.ReloadRadio = function(nova){
+    var ip_full = $scope.radios_arr[window.localStorage.getItem('lastradio')].ip;
     var radio_ativa = window.localStorage.getItem('lastradio');
-    var autoplay = window.localStorage.getItem('autoplay');
-    var ip_full = $scope.radios_arr[radio_ativa].ip;
-    
 
     $scope.radio_ativa = radio_ativa;
     $scope.radioTitulo = $scope.radios_arr[radio_ativa].title.toUpperCase();
@@ -388,7 +386,7 @@ app.directive('fadeIn', function($timeout){
     $scope.lastFMKey = 'ab68e9a71c1bb15efaa9c706b646dee4';
     $scope.lastFM = 'http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=1&api_key='+$scope.lastFMKey+'&track=';
 
-    $scope.radioURL = $scope.radioHost+':'+$scope.radioPort+'/;stream.mp3';
+    $scope.radioURL = $scope.radioHost+':'+$scope.radioPort+'/;';
     $scope.buttonIcon = '<span class="ion-ios-play"></span>';
 
     $scope.radioOptions = {
@@ -410,9 +408,36 @@ app.directive('fadeIn', function($timeout){
         $scope.radioOptions.albumArt = 'images/radio/logo_grande.png';
     }
 
-    if(autoplay=='true'){
-      console.log('auto');
-      $scope.startRadio(); 
+    if(nova=='sim'){
+      
+       $scope.radio = radio;
+       $scope.radio.stop()
+       $scope.radio = radio;
+        isPlaying = false;
+        $scope.radio = ngAudio.load($scope.radioURL);
+        radio = $scope.radio;
+        $scope.startRadio();
+    } else {
+
+      if (radio!==null) {
+          $scope.radio = radio;
+
+          if(isPlaying){
+             $scope.buttonIcon = '<img src="images/load.gif">';
+             setTimeout(function(){
+                 $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
+                  $scope.radio.play();
+             }, 5000);
+          } else {
+            $scope.buttonIcon = '<span class="ion-ios-play"></span>';
+          }
+      } else {
+          isPlaying = false;
+          $scope.radio = ngAudio.load($scope.radioURL);
+          radio = $scope.radio;
+          $scope.radio.stop();
+      }
+
     }
   }
     
@@ -430,18 +455,17 @@ app.directive('fadeIn', function($timeout){
       };
 
       $scope.startRadio = function(){
-      
         if(!isPlaying){
-            console.log('auto1');
           // Let's play it
             isPlaying = true;
-            $scope.radio = ngAudio.load($scope.radioURL);
-              $scope.radio.play();
+            $scope.radio.play();
            $scope.buttonIcon = '<img src="images/load.gif">';
-            console.log('auto2');
-            $scope.radioOptions.status = '';
-            $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
 
+           setTimeout(function(){
+              $scope.radioOptions.status = '';
+               $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
+                $scope.radio.play();
+           }, 5000);
           $scope.isFetching = true;
           if(window.localStorage.getItem('lastradio')=='0') {
             $scope.RefreshFaixa();
@@ -455,8 +479,6 @@ app.directive('fadeIn', function($timeout){
       }
 
  $scope.ReloadRadio();
-
-
     $scope.shareMusica = function () {
 
         var subject = 'Estou ouvindo';
@@ -481,10 +503,10 @@ app.directive('fadeIn', function($timeout){
 
     }, false);
 
-    // document.addEventListener("online", function(){
-    //   $scope.radio = ngAudio.load($scope.radioURL);
-    //   radio = $scope.radio;
-    // });
+    document.addEventListener("online", function(){
+      $scope.radio = ngAudio.load($scope.radioURL);
+      radio = $scope.radio;
+    });
 
   });
 

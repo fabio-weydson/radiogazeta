@@ -1645,7 +1645,18 @@ h6 {
 .tab-bar__button {
    -webkit-filter: grayscale(1) opacity(0.6);
 }
-:checked + .tab-bar__button {
+.tab-bar__item[active=true] .tab-bar__button{
+    color: #fff;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-top: none;
+  -webkit-filter: grayscale(0) opacity(1);
+}
+.ng-isolate-scope {
+    top: initial;
+}
+/* .active .tab-bar__button, :checked + .tab-bar__button {
   color: #fff;
   background-color: transparent;
   -webkit-box-shadow: none;
@@ -1656,7 +1667,7 @@ h6 {
 :checked + .tab-bar__button > .tab-bar__icon {
   color: #fff;
 
-}
+} */
 .tab-bar__button:disabled {
   opacity: 0.3;
   cursor: default;

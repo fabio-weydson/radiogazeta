@@ -15,42 +15,27 @@
 
   <!-- CSS for the Radio -->
   <link rel="stylesheet" href="css/radio.css">
-  <script type="text/javascript" src="http://900464851.r.cdn77.net/jwplayer6/jwplayer.js"></script>
- <script>jwplayer.key="NrWBH1lhm4oLIrRsrNJ8POdHKK8rQjt7J76m8w=="</script>
   <script src="lib/onsen/js/angular/angular.js"></script>    
   <script src="lib/onsen/js/angular/angular-touch.js"></script> 
+  <script src="js/angular-route.min.js"></script>
   <script src="lib/onsen/js/onsenui.js"></script>    
+  <script src="js/jquery.js"></script>  
   <script src="js/plugins.js"></script>  
   <script src="cordova.js"></script>
   <script src="js/app.js"></script>  
-   <script type='text/javascript' src='js/blur.min.js'></script>
-  
+  <script type='text/javascript' src='js/audio.js'></script>
 
-
-      
 </head>
 
 <body ng-controller="networkController">    
-
-     
-
+  <div id="radio" ng-controller="radioController">
+     <ons-navigator animation="fade" var="radioPage">  </ons-navigator>
   <ons-tabbar>
-    <ons-tab page="radio.html" active="true" ng-click="SayHello()">
-      <img src="images/radio/logo_xx.png"><br>
-      <span class="tab-label">Gazeta Cuiab&#xE1;</span>
+    <ons-tab  href="radio2.html" ng-click="mudaRadio(item.id);" ng-repeat="(key,item) in radios_arr" ng-attr-active="{{ radio_ativa == item.id }}" >
+      <img src="images/radio/logo_xx.png"  ><br>
+      <span class="tab-label">{{item.title}}</span>
     </ons-tab>
-    <ons-tab page="radio.html">
-       <img src="images/radio/logo_xx.png"><br>
-      <span class="tab-label">Alta Floresta</span>
-    </ons-tab>
-    <ons-tab page="radio.html">
-      <img src="images/radio/logo_xx.png"><br>
-      <span class="tab-label">Barra do Gar&#xE7;as</span>
-    </ons-tab>
-    <ons-tab page="radio.html">
-      <img src="images/radio/logo_xx.png"><br>
-      <span class="tab-label">Poxor&#xE9;u</span>
-    </ons-tab>    
+   
   </ons-tabbar>
 
   <!-- Insert the modal in your index.html -->
@@ -58,5 +43,6 @@
   <ons-modal var="offlineMessage">
    Voc&#xEA; est&#xE1; sem conex&#xE3;o.
   </ons-modal>
+</radio>
 </body>
 </html>

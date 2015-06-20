@@ -435,11 +435,13 @@ map.fullscreen {
   z-index: 2;
   top: 8%;
 }
-.radiobox img {
+.radiobox .capa img {
   width: 100%;
+  display: block;
+  min-height: 1px;    max-height: 220px;    max-width: 100%;
 }
 #stream-time {
-  color: #fff;
+  color: #DADADA;
   text-align: right;
   font-size: 0.5em;
   line-height: 17px;
@@ -587,11 +589,12 @@ img.bg {
   right: 0;
   position: fixed;
   z-index: -2;
-  -webkit-filter: blur(3px);    
-  -moz-filter: blur(3px);    
-  -o-filter: blur(3px);    
-  -ms-filter: blur(3px);
-  /* IE 8 */    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";      /* IE 5-7 */    filter: alpha(opacity=50);      /* Netscape */    -moz-opacity: 0.5;      /* Safari 1.x */    -khtml-opacity: 0.5;      /* Good browsers */    opacity: 0.5;
+  -webkit-filter: blur(5px);    
+  -moz-filter: blur(5px);    
+  -o-filter: blur(5px);    
+  -ms-filter: blur(5px);
+  /* IE 8 */    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";      /* IE 5-7 */    filter: alpha(opacity=50);      /* Netscape */    -moz-opacity: 0.5;      /* Safari 1.x */    -khtml-opacity: 0.5;      /* Good browsers */    
+  /* opacity: 0.5; */
 }
 .button--clean {
   padding: 0;
@@ -1451,9 +1454,11 @@ ons-col#display {
     min-height: 240px;
 }
 ons-row#controls {
-    margin-bottom: 5px;
-    /* position: absolute; */
-    /* bottom: 0px; */
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0px;
+    padding: 5px 0;
+    background: rgba(242, 242, 242, 0.8);
 }
 .ball {
     background: #B7431E;
@@ -1492,12 +1497,22 @@ span.artista {
     overflow: hidden;
     height: 14px;
 }
-span.capa img {
-    min-height: 1px;
-    width: 100%;
-    max-height: 220px;
-}
+
 span.capa {
     display: block;
-    margin-top: 42px;
+    margin-top: 40px;
+    width: 100%;
+    overflow: hidden;
+}
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+    transition: all linear 0.5s;
+    display: block !important;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active, .animate-show.ng-hide-remove {
+    opacity: 0;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active {
+    opacity: 0.5;
 }
