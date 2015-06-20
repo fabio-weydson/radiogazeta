@@ -22,6 +22,8 @@
 
   app.controller('networkController', function($scope){
 
+    $scope.logo = 'images/radio/logo_xx.png';
+
     ons.ready(function(){
       $scope.ons.navigator.pushPage('radio2.html',{title : 'title'});
       StatusBar.styleBlackOpaque();
@@ -353,11 +355,10 @@ app.directive('fadeIn', function($timeout){
     $scope.mudaRadio= function (idRadio){
        $scope.buttonIcon = '<img src="images/load.gif">';
         var radioIP =  $scope.radios_arr[idRadio].ip;
+        $scope.radio = ngAudio.load('sc6.dnsip.com.br:13250');
         window.localStorage.setItem('lastradio', $scope.radios_arr[idRadio].id);    
         window.localStorage.setItem('autoplay', true);    
-        //$scope.ReloadRadio('sim');
         location.reload(); 
-        //$scope.radio.stop();
         return false;
     } 
 
@@ -371,6 +372,7 @@ app.directive('fadeIn', function($timeout){
     }
 
   $scope.ReloadRadio = function(){
+
     var radio_ativa = window.localStorage.getItem('lastradio');
     var autoplay = window.localStorage.getItem('autoplay');
     var ip_full = $scope.radios_arr[radio_ativa].ip;
@@ -399,8 +401,9 @@ app.directive('fadeIn', function($timeout){
         Musica: '',
          status: 'Parado'
     }
-     $scope.radioOptions.Titulo = $scope.radios_arr[radio_ativa].title;
-   
+    $scope.radioOptions.Titulo = $scope.radios_arr[radio_ativa].title;
+    
+
    if(window.localStorage.getItem('lastradio')=='0') {
       setTimeout($scope.RefreshFaixa, 1000);
       $interval( function(){ $scope.RefreshFaixa(); }, 40000);
@@ -411,10 +414,37 @@ app.directive('fadeIn', function($timeout){
     }
 
     if(autoplay=='true'){
-      console.log('auto');
       $scope.startRadio(); 
+      $scope.isPlaying = true;
     }
   }
+
+
+  $scope.startRadio = function(){
+      console.log($scope.isPlaying);
+        if(!$scope.isPlaying){
+            $scope.radio = ngAudio.load($scope.radioURL);
+            console.log('toca');
+            $scope.isPlaying = true;
+            $scope.radio.play();
+            $scope.buttonIcon = '<img src="images/load.gif">';
+                setTimeout(function(){
+                 $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
+             }, 5000);
+            $scope.radioOptions.status = '';
+            $scope.isFetching = true;
+
+          if(window.localStorage.getItem('lastradio')=='0') {
+            $scope.RefreshFaixa();
+          }
+
+        } else {
+          // Let's pause it
+          $scope.isPlaying = false;
+          $scope.radio.stop();
+          $scope.buttonIcon = '<span class="ion-ios-play"></span>';
+        }
+      }
     
     $scope.curtir = function() {
       $('.descurtir').removeClass('active');
@@ -428,32 +458,6 @@ app.directive('fadeIn', function($timeout){
     $scope.renderHtml = function (htmlCode) {
           return $sce.trustAsHtml(htmlCode);
       };
-
-      $scope.startRadio = function(){
-      
-        if(!isPlaying){
-            console.log('auto1');
-          // Let's play it
-            isPlaying = true;
-            $scope.radio = ngAudio.load($scope.radioURL);
-              $scope.radio.play();
-           $scope.buttonIcon = '<img src="images/load.gif">';
-            console.log('auto2');
-            $scope.radioOptions.status = '';
-            $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
-
-          $scope.isFetching = true;
-          if(window.localStorage.getItem('lastradio')=='0') {
-            $scope.RefreshFaixa();
-          }
-        } else {
-          // Let's pause it
-          isPlaying = false;
-          $scope.radio.stop();
-          $scope.buttonIcon = '<span class="ion-ios-play"></span>';
-        }
-      }
-
  $scope.ReloadRadio();
 
 

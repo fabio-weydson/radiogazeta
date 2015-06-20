@@ -1642,8 +1642,13 @@ h6 {
   margin: 0;
   padding: 0;
 }
+.tab-bar__item[active=true] {
+    background-color: #545454;
+}
+
+
 .tab-bar__button {
-   -webkit-filter: grayscale(1) opacity(0.6);
+   /* -webkit-filter: grayscale(1) opacity(0.6); */
 }
 .tab-bar__item[active=true] .tab-bar__button{
     color: #fff;
@@ -1651,7 +1656,8 @@ h6 {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-top: none;
-  -webkit-filter: grayscale(0) opacity(1);
+  
+    /* -webkit-filter: grayscale(0) opacity(1); */
 }
 .ng-isolate-scope {
     top: initial;

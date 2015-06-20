@@ -31,7 +31,7 @@
      <ons-navigator animation="fade" var="radioPage">  </ons-navigator>
   <ons-tabbar>
     <ons-tab  href="radio2.html" ng-click="mudaRadio(item.id);" ng-repeat="(key,item) in radios_arr" ng-attr-active="{{ radio_ativa == item.id }}" >
-      <img src="images/radio/logo_xx.png"  ><br>
+      <img ng-src="{{logo}}"  ><br>
       <span class="tab-label">{{item.title}}</span>
     </ons-tab>
    
