@@ -391,18 +391,20 @@ h6 {
   user-select: none;
   z-index: 2;
   display: block;
-  height: 44px;
+  /* height: 44px; */
   padding-left: 0;
   padding-right: 0;
   background: #F4F4F4;
-  color: #fff;
+  color: #FFF;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-bottom: 1px solid #FFF;
   font-weight: 400;
   width: 100%;
   white-space: nowrap;
+  background: url(../images/bg_menu.jpg) !important;
   overflow: visible;
+  /* padding-top: 20px; */
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .navigation-bar {
@@ -448,8 +450,9 @@ h6 {
 }
 .navigation-bar__right {
   max-width: 50%;
-  width: 27%;
+  /* width: 23%; */
   text-align: right;
+  float: right;
 }
 .navigation-bar__center {
   width: 46%;
@@ -463,11 +466,14 @@ h6 {
   line-height: 44px;
   font-size: 17px;
   font-weight: 500;
-  color: #989FAD;
+  color: #ECE9E9;
   margin: 0;
   text-align: left;
+  font-family: "Roboto";
   padding: 0;
   overflow: visible;
+  width: 57%;
+  float: left;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
@@ -811,6 +817,9 @@ h6 {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
+}
+.button--red {
+    background: #C23D3D;
 }
 .button:active {
   background-color: rgba(24,103,194,0.81);
@@ -1510,11 +1519,12 @@ h6 {
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  min-height: 79px;
-  border-top: 1px solid rgba(0,0,0,0);
+  /* min-height: 79px; */
+  /* border-top: 1px solid rgba(0,0,0,0); */
   width: 100%;
-  background-size: 78px 67px;
-  background: #292F34 url(../images/bg_menu.jpg?v=2);
+  /* background-size: 78px 67px; */
+  /* background: #292F34 url(../images/bg_menu.jpg?v=2); */
+  background: rgba(27, 27, 27, 0.48);
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .tab-bar {
@@ -1565,8 +1575,8 @@ h6 {
 .tab-bar__button {
   position: relative;
   border: 0;
-  border-left: 1px solid #32393F;
-  border-right: 1px solid #22252A;
+  border-left: 1px solid rgba(168, 168, 168, 0.28);
+  border-right: 1px solid rgba(0, 0, 0, 0.26);
   display: block;
   vertical-align: top;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -1643,7 +1653,7 @@ h6 {
   padding: 0;
 }
 .tab-bar__item[active=true] {
-    background-color: #545454;
+    background-color: rgba(255, 255, 255, 0.26);
 }
 
 

@@ -7,16 +7,15 @@
 /* Roots CSS has lots of helpers for your app, check out the demos to learn more */
 /* Fonts */
 @font-face {
-  font-family: "Playfair Display SC";
-  src: url('../fonts/playfair.woff2') format('woff2'), url('../fonts/playfair.woff') format('woff'), url('../fonts/playfair.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 400;
-}
-@font-face {
-  font-family: "Lobster";
-  src: url('../fonts/lobster.woff2') format('woff2'), url('../fonts/lobster.woff') format('woff'), url('../fonts/lobster.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 400;
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular-webfont.eot');
+    src: url('../fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Roboto-Regular-webfont.svg#Roboto') format('svg'),
+         url('../fonts/Roboto-Regular-webfont.woff') format('woff'),
+         url('../fonts/Roboto-Regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
 }
 /* Global & Helpers */
 h1,
@@ -433,12 +432,13 @@ map.fullscreen {
   width: 100%;
   height: 100%;
   z-index: 2;
-  top: 8%;
+  top: 14%;
 }
 .radiobox .capa img {
   width: 100%;
   display: block;
-  min-height: 1px;    max-height: 220px;    max-width: 100%;
+  min-height: 1px;    
+  max-height: 300px;    max-width: 100%;
 }
 #stream-time {
   color: #DADADA;
@@ -449,60 +449,91 @@ map.fullscreen {
   right: 4px;
   position: absolute;
   top: 13px;
+  font-family: "Roboto";
 }
 .song-title {
   color: #fff;
   font-size: 0.7em;
   line-height: 16px;
   margin-bottom: 0;
-  background: #363D43;
+  /* background: #363D43; */
+  font-family: "Roboto" !important;
   position: absolute;
   text-align: left;
   margin: 0;
   width: 94%;
   padding: 3%;
   height: 28px;
-  border-radius: 7px 7px 0 0;
+  /* border-radius: 7px 7px 0 0; */
   top: 0;
+}
+.song-title .titulo {
+    display: block;
+}
+.navigation-bar__right .botoes {
+    float: left;
+    margin-right: 8px !important;
+    border-radius: 5px;
+    border-color: #ECE9E9;
+    height: 28px;
+    line-height: 32px;
+    width: 34px;
+}
+
+.navigation-bar__right {
+    padding-top: 6px;
+}
+
+.navigation-bar__right .botoes span {
+    color: #ECE9E9;
 }
 a.botoes {
   display: block;
   margin: 0 auto!important;
   text-align: center;
-  width: 28px;
-  height: 28px;
-  line-height: 32px;
-  border-radius: 50%;
-  color: rgba(255, 255, 255, 0.9);
-  border:2px solid #353D43;;
+  width: 40px;
+  height: 40px;
+  line-height: 50px;
+  /* border-radius: 50%; */
+  color: #E4E4E4;
+  /* background: rgba(54, 61, 67, 0.5); */
+  /* border: 2px solid #E4E4E4; */;
 }
 .botoes span{
-  color:#353D43;
-  font-size: 20px;
+  color: #E4E4E4;
+  font-size: 27px;
   line-height: normal;
 }
 a.botoes.active span {
-    color: #FF0493;
+    color: #00A3EA;
 }
 #btn-play {
   display: block;
   margin: 0 auto!important;
   text-align: center;
   width: 45px;
-  height: 45px;
-  line-height: 48px;
-  background: #353D43;
-  font-size: 34px;
-  border-radius: 50%;
-  color: rgba(255, 255, 255, 0.9);
+  height: 47px;
+  line-height: 40px;
+  /* background: rgba(54, 61, 67, 0.5); */
+  font-size: 54px;
+  /* border: 2px solid #E4E4E4; */
+  /* border-radius: 50%; */
+  color: #E4E4E4;    
+  /* opacity: .7; */
 }
 #btn-play .ion-ios7-play,
 #btn-play .ion-ios-play {
-  margin-left: 4px;
+  margin-left: 4px;    ;
+}
+#btn-play img {
+    margin: 0 auto;
+    margin-top: 10px;
+    display: block;
+    width: 73%;
 }
 #btn-play:hover {
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.2);
+  /* text-shadow: 0 0 4px rgba(0, 0, 0, 0.2); */
+  /* box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.2); */
 }
 /* Video Stream Module */
 .video-stream {
@@ -573,13 +604,14 @@ img.bg {
 }
 .bgbox {
   height: 100%;
-  width: 150%!important;
+  width: 100%!important;
   z-index: -1;
   position: absolute;
   top: 0;
   background: #000;
   overflow: hidden;
 }
+/*
 .bgbox img.bg {
   width: 150%;
   height: 100%;
@@ -593,8 +625,26 @@ img.bg {
   -moz-filter: blur(5px);    
   -o-filter: blur(5px);    
   -ms-filter: blur(5px);
-  /* IE 8 */    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";      /* IE 5-7 */    filter: alpha(opacity=50);      /* Netscape */    -moz-opacity: 0.5;      /* Safari 1.x */    -khtml-opacity: 0.5;      /* Good browsers */    
-  /* opacity: 0.5; */
+   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";   
+   filter: alpha(opacity=50);     
+   -moz-opacity: 0.5;    
+   -khtml-opacity: 0.5;      
+   opacity: 0.5; 
+}
+*/
+.bgbox img.bg,.bgbox .mask {
+  width: 200%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: -50%;
+  right: 0;
+  position: fixed;
+  z-index: -2;
+ filter: url(blur.svg#blur); 
+ -webkit-filter: blur(3px); 
+ filter: blur(3px); 
+ filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
 }
 .button--clean {
   padding: 0;
@@ -1447,18 +1497,19 @@ ons-page.friends .person-image img {
   }
 }
 ons-col#display {
-    border: 8px solid #DED9D9;
-    border-radius: 14px;
-    background: #FFF;
+    /* border: 6px solid #DED9D9; */
+    /* border-radius: 6px; */
+    /* background: #FFF; */
     position: relative;
-    min-height: 240px;
+    min-height: 200px;
+    overflow: hidden;
 }
 ons-row#controls {
     margin-bottom: 0;
-    position: absolute;
-    bottom: 0px;
+    /* position: absolute; */
+    height: 66px;
     padding: 5px 0;
-    background: rgba(242, 242, 242, 0.8);
+    /* background: rgba(38, 43, 47, 0); */
 }
 .ball {
     background: #B7431E;
@@ -1475,14 +1526,14 @@ ons-row#controls {
     background: #1C9F2D;
 }
 .tocada {
-    border: 5px solid #DED9D9;
-    border-radius: 10px;
     height: 47px;
     margin: 0 auto;
-    width: 90%;
-    background: url(../images/bg_menu.jpg);
-    background-size: auto 100%;
-    margin-top:7%;
+    width: 100%;
+    margin-top: 6%;
+    color: #fff;    font-size: 0.7em;    
+    line-height: 16px;    margin-bottom: 0;        font-family: "Roboto" !important;        text-align: left;            padding: 3%;            
+    background: rgba(187, 187, 187, 0.14); */;
+    text-shadow: 0px 0px 8px #5E5E5E;
 }
 span.titulo {
     height: 16px;
@@ -1492,21 +1543,32 @@ span.titulo {
 
 span.artista {
     display: block;
-    font-size: 0.7em;
-    color: #A2B0BD;
+    font-size: 0.8em;
+    color: #DBC90A;
     overflow: hidden;
     height: 14px;
 }
-
-span.capa {
+span.seguida {
     display: block;
-    margin-top: 40px;
-    width: 100%;
+    margin-top: -1px;
+    text-align: left;
+    color: #DDDCDC;
+}
+
+
+.tocada .artista {
+    font-size: 0.8em;
+}
+span.capa {
+    margin: 0 auto;
+    display: block;
+    margin-top: 48px;
+    width: 70%;
     overflow: hidden;
 }
 .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
     transition: all linear 0.5s;
-    display: block !important;
+    display: block;
 }
 
 .animate-show.ng-hide-add.ng-hide-add-active, .animate-show.ng-hide-remove {
@@ -1515,4 +1577,16 @@ span.capa {
 
 .animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active {
     opacity: 0.5;
+}
+ons-tab.ng-isolate-scope.active {
+    /* background-color: #3F4144 !important; */
+}
+#pedidos section {
+    min-height: 35px;
+}
+a.botoes[active=false] span {
+    color: rgba(228, 228, 228, 0.34);
+}
+.platform-ios .navigation-bar {
+    padding-top:20px !important;
 }
