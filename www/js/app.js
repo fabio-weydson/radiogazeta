@@ -545,10 +545,23 @@
             } else {
                var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT";
             }
-            var imagem = $scope.radioOptions.albumArt;
-            var imagem = '';
+            var imagem = 'http://fm.gazetadigital.com.br/site/imagens/logo_grande.png';
+            //var imagem = '';
             var link = 'http://fm.gazetadigital.com.br';
             window.plugins.socialsharing.share(message, subject, imagem, link);
+        }
+
+        $scope.shareMusica2 = function() {
+            var subject = 'Radio ' + $scope.radioOptions.Titulo;
+            if($scope.radioOptions.songTitle) {
+               var message = 'Estou ouvindo ' + $scope.radioOptions.songTitle + " Via App ofical Rede Gazeta MT";
+            } else {
+               var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT";
+            }
+            var imagem = 'http://fm.gazetadigital.com.br/site/imagens/logo_grande.png';
+            //var imagem = '';
+            var link = 'http://fm.gazetadigital.com.br';
+            window.plugins.socialsharing.share(message, null, imagem, link);
         }
 
         $scope.AbrePedidos = function(){
