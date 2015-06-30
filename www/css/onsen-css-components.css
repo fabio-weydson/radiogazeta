@@ -5,6 +5,7 @@ html {
 body {
   position: absolute;
   top: 0;
+  background-color: #000;
   right: 0;
   left: 0;
   bottom: 0;
@@ -373,7 +374,7 @@ h6 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
   white-space: nowrap;
   overflow: hidden;
   word-spacing: 0;
@@ -394,7 +395,7 @@ h6 {
   /* height: 44px; */
   padding-left: 0;
   padding-right: 0;
-  background: #F4F4F4;
+  /* background: #F4F4F4; */
   color: #FFF;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -402,7 +403,7 @@ h6 {
   font-weight: 400;
   width: 100%;
   white-space: nowrap;
-  background: url(../images/bg_menu.jpg) !important;
+  /* background: url(../images/bg_menu.jpg) !important; */
   overflow: visible;
   /* padding-top: 20px; */
 }
@@ -410,7 +411,7 @@ h6 {
   .navigation-bar {
     border-bottom: none;
   
-    background: #F4F4F4;
+    /* background: #F4F4F4; */
 }
 }
 .navigation-bar__line-height {

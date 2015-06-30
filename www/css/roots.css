@@ -608,8 +608,14 @@ img.bg {
   z-index: -1;
   position: absolute;
   top: 0;
-  background: #000;
+  background-size: auto 100%;
   overflow: hidden;
+  background-position: center top;
+  filter: url(blur.svg#blur); 
+  -webkit-filter: blur(6px); 
+  filter: blur(6px); 
+  opacity: 0.4; 
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='6');
 }
 /*
 .bgbox img.bg {

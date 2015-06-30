@@ -270,6 +270,10 @@
 
     app.controller('radioController', function($scope, $sce, $interval, $timeout) {
 
+        console.log($(window).width());
+ console.log($(window).height());
+
+ $('.bgbox img').width
         $scope.isPlaying = false;
         $scope.autoplay = false;
         $scope.lastradio = window.localStorage.getItem('lastradio');
@@ -434,7 +438,7 @@
         };
 
         $scope.RefreshFaixa = function() {
-         
+            
             $scope.capa_antiga =  window.localStorage.getItem('capa_antiga');
 
             var track_atual = window.localStorage.getItem('track_atual');
@@ -471,11 +475,12 @@
                     $scope.radioOptions.Artista = Artista;
                     $scope.radioOptions.Musica = Musica;
                 });
-                var result = $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "teaser", "thomas", "gazeta fm", "diversos", "trilha", "vh", "fm", "ferreto", "2015"]);
+                var result = $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "teaser", "thomas", "andorinha", "gazeta fm", "diversos", "trilha", "vh", "fm", "ferreto", "2015"]);
                 if (result != null) {
                     $scope.ExibeBanner();
                 } else {
                   if(track_atual!=$scope.track_check) {
+                    $('.descurtir,.curtir').removeClass('active');
                     $scope.ExibeFavoritar = true;
                      window.localStorage.setItem('track_atual', $scope.limpa_str(songTitle.replace(/\s/g, '')));
 
@@ -541,27 +546,14 @@
         $scope.shareMusica = function() {
             var subject = 'Radio ' + $scope.radioOptions.Titulo;
             if($scope.radioOptions.songTitle) {
-               var message = 'Estou ouvindo ' + $scope.radioOptions.songTitle + " Via App ofical Rede Gazeta MT";
+               var message = 'Estou ouvindo ' + $scope.radioOptions.songTitle + " Via App ofical Rede Gazeta MT #redegazeta";
             } else {
-               var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT";
+               var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT #redegazeta";
             }
-            var imagem = 'http://fm.gazetadigital.com.br/site/imagens/logo_grande.png';
+            var imagem = 'http://i.imgur.com/jsHElO0.jpg';
             //var imagem = '';
-            var link = 'http://fm.gazetadigital.com.br';
+            var link = 'http://bit.ly/1LThHb0';
             window.plugins.socialsharing.share(message, subject, imagem, link);
-        }
-
-        $scope.shareMusica2 = function() {
-            var subject = 'Radio ' + $scope.radioOptions.Titulo;
-            if($scope.radioOptions.songTitle) {
-               var message = 'Estou ouvindo ' + $scope.radioOptions.songTitle + " Via App ofical Rede Gazeta MT";
-            } else {
-               var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT";
-            }
-            var imagem = 'http://fm.gazetadigital.com.br/site/imagens/logo_grande.png';
-            //var imagem = '';
-            var link = 'http://fm.gazetadigital.com.br';
-            window.plugins.socialsharing.share(message, null, imagem, link);
         }
 
         $scope.AbrePedidos = function(){

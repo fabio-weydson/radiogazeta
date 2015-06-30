@@ -28,8 +28,6 @@
 
 <body ng-controller="networkController">    
   <div id="radio" ng-controller="radioController"  >
- 
-<!-- <jwplayer player-id="myplayer" setup="options"></jwplayer>  -->
     <ons-toolbar >
       <div class="left">
         <img src="images/radio/logo_xx.png" style="  width: 36px;
@@ -40,7 +38,7 @@
       </div>
       <div class="right">
         <a href="#" class="botoes" ng-click="shareMusica()" ><span class="ion-share"></span></a>
-        <a href="#" class="botoes" ng-click="shareMusica2()"><span class="ion-share"></span></a>
+        <a href="#" class="botoes" ng-click="AbrePedidos()"><span class="ion-ios-email"></span></a>
       </div>
     </ons-toolbar>
 
@@ -85,9 +83,9 @@
           <ons-col width="32%"></ons-col>
         </ons-row>
       </div>
-      <div class="bgbox">
+      <div class="bgbox blurs bg" style="background-image:url('{{radioOptions.albumArt}}')" fade-in>
 <!--         <img ng-src="{{ capa_antiga }}"  img-cache  class="blurs bg animate-show mask" fade-in />
- -->        <img ng-src="{{ radioOptions.albumArt }}"  img-cache  class="blurs bg animate-show" fade-in />
+       <img ng-src="{{ radioOptions.albumArt }}"  img-cache  class="blurs bg animate-show" fade-in /> --> 
       </div>
     </div>
 
