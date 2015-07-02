@@ -270,9 +270,6 @@
 
     app.controller('radioController', function($scope, $sce, $interval, $timeout) {
 
-        console.log($(window).width());
- console.log($(window).height());
-
  $('.bgbox img').width
         $scope.isPlaying = false;
         $scope.autoplay = false;
@@ -497,9 +494,9 @@
                         //   }).fadeIn('normal');
                         // }, 5000);
 
-                         $timeout(function(){
-                          //$('#controls').fadeOut('slow');
-                        }, 20000);
+                        //  $timeout(function(){
+                        //   $('#controls').fadeOut('slow');
+                        // }, 20000);
 
                         $("span.capa img").error(function() {
                             $scope.radioOptions.albumArt = 'images/radio/cover.png';

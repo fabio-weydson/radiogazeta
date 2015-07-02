@@ -3,16 +3,16 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.phonegap.gazetafm"
-        version   = "0.85">
+        id        = "com.fabiopweydson.gazetafm"
+        version   = "1.0">
 
-    <name>Rádio Gazeta</name>
+    <name>Rede Gazeta MT</name>
 
     <description>
-        App radio
+        App da rede Gazeta de Radio, Mato Grosso
     </description>
 
-    <author href="http://phonegap.com" email="support@phonegap.com">
+    <author href="http://fm.gazetadigital.com.br" email="fabioweydson@gmail.com">
         Grupo Gazeta
     </author>
 
