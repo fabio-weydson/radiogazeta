@@ -85,7 +85,7 @@
     <icon src="res/icon/webos/icon-64.png"          gap:platform="webos" />
     <icon src="res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
     <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" /> -->
-
+    <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
     <!-- Define app splash screen for each platform. -->
     <gap:splash src="splash.png" /> 
 <!--     <gap:splash src="res/screen/android/splash.png"       gap:platform="android" gap:qualifier="port-ldpi" />
