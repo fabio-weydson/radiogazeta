@@ -433,7 +433,10 @@
         $scope.renderHtml = function(htmlCode) {
             return $sce.trustAsHtml(htmlCode);
         };
-
+        $scope.CloseApp = function(){
+            $scope.radio.stop();
+            navigator.app.exitApp();
+        }
         $scope.RefreshFaixa = function() {
             
             $scope.capa_antiga =  window.localStorage.getItem('capa_antiga');
@@ -581,6 +584,8 @@
             });
         }
         // Check if is Offline
+        document.addEventListener("backbutton", CloseApp(), true); 
+
         document.addEventListener("offline", function() {
 
             $scope.isPlaying = false;
