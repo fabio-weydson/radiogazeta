@@ -280,22 +280,22 @@
         }
         $scope.radios_arr = [{
             id: '0',
-            title: 'Cuiabá',
+            title: 'Cuiabá 99,9',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc6.dnip.com.br:13250'
         }, {
             id: '1',
-            title: 'Alta Floresta',
+            title: 'Alta Floresta 95,5',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:12575'
         }, {
             id: '2',
-            title: 'Barra do Garças',
+            title: 'Barra do Garças 96,1',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:15165'
         }, {
             id: '3',
-            title: 'Poxoréu',
+            title: 'Poxoréu 90,9',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:11540'
         }];
