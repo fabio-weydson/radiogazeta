@@ -465,7 +465,7 @@ h6 {
 }
 .navigation-bar__title {
   line-height: 44px;
-  font-size: 17px;
+  font-size: 1.0em;
   font-weight: 500;
   color: #ECE9E9;
   margin: 0;
@@ -473,7 +473,7 @@ h6 {
   font-family: "Roboto";
   padding: 0;
   overflow: visible;
-  width: 57%;
+  width: auto;
   float: left;
 }
 .navigation-bar__center:first-child:last-child {

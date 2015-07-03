@@ -490,8 +490,8 @@ map.fullscreen {
     border-radius: 5px;
     border-color: #ECE9E9;
     height: 28px;
-    line-height: 32px;
-    width: 34px;
+    line-height: 36px;
+    width: 32px;
 }
 
 .navigation-bar__right {
@@ -500,6 +500,7 @@ map.fullscreen {
 
 .navigation-bar__right .botoes span {
     color: #ECE9E9;
+    font-size: 23px;
 }
 a.botoes {
   display: block;

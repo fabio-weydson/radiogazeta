@@ -433,10 +433,7 @@
         $scope.renderHtml = function(htmlCode) {
             return $sce.trustAsHtml(htmlCode);
         };
-        $scope.CloseApp = function(){
-            $scope.radio.stop();
-            navigator.app.exitApp();
-        }
+    
         $scope.RefreshFaixa = function() {
             
             $scope.capa_antiga =  window.localStorage.getItem('capa_antiga');
@@ -542,7 +539,7 @@
                 });
             })
         }
-
+  
         $scope.shareMusica = function() {
             var subject = 'Radio ' + $scope.radioOptions.Titulo;
             if($scope.radioOptions.songTitle) {
@@ -583,13 +580,21 @@
               alert( "Ocorreu um erro, tente novamente." );
             });
         }
+          $scope.CloseApp = function(){
+            $('#jquery_jplayer_1').jPlayer('stop');
+             if (navigator.app) {
+                        navigator.app.exitApp();
+                    } else if (navigator.device) {
+                        navigator.device.exitApp();
+                    }
+        }
         // Check if is Offline
-        document.addEventListener("backbutton", CloseApp(), true); 
+        document.addEventListener("backbutton", $scope.CloseApp(), true); 
 
         document.addEventListener("offline", function() {
 
             $scope.isPlaying = false;
-            $scope.radio.stop();
+            $('#jquery_jplayer_1').jPlayer('stop');
             $scope.buttonIcon = '<span class="ion-ios-play"></span>';
             $scope.radio = null;
             modal.show();
