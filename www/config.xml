@@ -59,7 +59,7 @@
 
 
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <gap:plugin name="cordova-plugin-file" source="npm" version="2.0.0" /> 
+<!--     <gap:plugin name="cordova-plugin-file" source="npm" version="2.0.0" /> 
     <gap:plugin name="nl.x-services.plugins.toast"  /> 
     <gap:plugin name="cordova-plugin-device" source="npm" version="1.0.0" /> 
     <gap:plugin name="cordova-plugin-device-motion" source="npm"  />
@@ -72,9 +72,9 @@
     <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.0.0" /> 
     <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="2.0.0" /> 
     <gap:plugin name="cordova-plugin-statusbar" source="npm" version="1.0.0" />
-    <gap:plugin name="nl.x-services.plugins.socialsharing" />
+    <gap:plugin name="nl.x-services.plugins.socialsharing" /> -->
 
-<!-- 
+
       <gap:plugin name="org.apache.cordova.console" />
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.device-motion" />
@@ -87,7 +87,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
-    <gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" /> -->
+    <gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
     <!--
