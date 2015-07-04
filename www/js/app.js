@@ -280,22 +280,22 @@
         }
         $scope.radios_arr = [{
             id: '0',
-            title: 'Cuiabá 99,9',
+            title: 'Cuiabá 99.9',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc6.dnip.com.br:13250'
         }, {
             id: '1',
-            title: 'Alta Floresta 95,5',
+            title: 'Alta Floresta 95.5',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:12575'
         }, {
             id: '2',
-            title: 'Barra do Garças 96,1',
+            title: 'Barra do Garças 96.1',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:15165'
         }, {
             id: '3',
-            title: 'Poxoréu 90,9',
+            title: 'Poxoréu 90.9',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:11540'
         }];
@@ -580,16 +580,16 @@
               alert( "Ocorreu um erro, tente novamente." );
             });
         }
-          $scope.CloseApp = function(){
-            $('#jquery_jplayer_1').jPlayer('stop');
-             if (navigator.app) {
-                        navigator.app.exitApp();
-                    } else if (navigator.device) {
-                        navigator.device.exitApp();
-                    }
-        }
+        // $scope.CloseApp = function(){
+        //     $('#jquery_jplayer_1').jPlayer('stop');
+        //      if (navigator.app) {
+        //                 navigator.app.exitApp();
+        //             } else if (navigator.device) {
+        //                 navigator.device.exitApp();
+        //             }
+        // }
         // Check if is Offline
-        document.addEventListener("backbutton", $scope.CloseApp(), true); 
+        //document.addEventListener("backbutton", $scope.CloseApp(), true); 
 
         document.addEventListener("offline", function() {
 
