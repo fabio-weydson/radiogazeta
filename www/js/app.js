@@ -580,16 +580,16 @@
               alert( "Ocorreu um erro, tente novamente." );
             });
         }
-        // $scope.CloseApp = function(){
-        //     $('#jquery_jplayer_1').jPlayer('stop');
-        //      if (navigator.app) {
-        //                 navigator.app.exitApp();
-        //             } else if (navigator.device) {
-        //                 navigator.device.exitApp();
-        //             }
-        // }
-        // Check if is Offline
-        //document.addEventListener("backbutton", $scope.CloseApp(), true); 
+        $scope.CloseApp = function(){
+            $('#jquery_jplayer_1').jPlayer('stop');
+             if (navigator.app) {
+                        navigator.app.exitApp();
+                    } else if (navigator.device) {
+                        navigator.device.exitApp();
+                    }
+        }
+        
+        document.addEventListener("backbutton", $scope.CloseApp, true); 
 
         document.addEventListener("offline", function() {
 
