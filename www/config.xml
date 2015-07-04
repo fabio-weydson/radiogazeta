@@ -73,6 +73,8 @@
     <gap:plugin name="nl.x-services.plugins.socialsharing" /> -->
 
 
+
+
       <gap:plugin name="org.apache.cordova.console" />
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.device-motion" />
