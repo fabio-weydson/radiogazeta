@@ -597,7 +597,8 @@
                 setTimeout(function () {
                     // Modify the currently displayed notification
                     cordova.plugins.backgroundMode.configure({
-                        title:  $scope.radioOptions.Titulo
+                        title:  $scope.radioOptions.Titulo,
+                        text: $scope.radioOptions.songTitle
                     });
                 }, 5000);
             }
