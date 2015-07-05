@@ -21,27 +21,6 @@
 
         $scope.logo = 'images/radio/logo_xx.png';
 
-        ons.ready(function() {
-            if(ons.platform.isIOS()){
-                $('.navigation-bar').css({'padding-top':"20px"});
-            }
-               // Android customization
-    cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
-    // Enable background mode
-    cordova.plugins.backgroundMode.enable();
-
-    // Called when background mode has been activated
-    cordova.plugins.backgroundMode.onactivate = function () {
-        setTimeout(function () {
-            // Modify the currently displayed notification
-            cordova.plugins.backgroundMode.configure({
-                text:'Running in background for more than 5s now.'
-            });
-        }, 5000);
-    }
-            //$scope.ons.navigator.pushPage('radio2.html',{title : 'title'});
-            StatusBar.styleBlackOpaque();
-        });
 
         // Check if is Offline
         document.addEventListener("offline", function() {
@@ -602,6 +581,26 @@
                         navigator.device.exitApp();
                     }
         }
+
+
+        ons.ready(function() {
+            if(ons.platform.isIOS()){
+                $('.navigation-bar').css({'padding-top':"20px"});
+            }
+            cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, text:'Clique para abrir o aplicativo.'});
+            cordova.plugins.backgroundMode.enable();
+            // Called when background mode has been activated
+            cordova.plugins.backgroundMode.onactivate = function () {
+                setTimeout(function () {
+                    // Modify the currently displayed notification
+                    cordova.plugins.backgroundMode.configure({
+                        title:  $scope.radioOptions.Titulo
+                    });
+                }, 5000);
+            }
+                    //$scope.ons.navigator.pushPage('radio2.html',{title : 'title'});
+                    StatusBar.styleBlackOpaque();
+        });
         
         document.addEventListener("backbutton", $scope.CloseApp, true); 
 
