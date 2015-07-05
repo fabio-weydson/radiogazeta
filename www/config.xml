@@ -139,9 +139,7 @@
     <gap:config-file platform="ios" parent="CFBundleShortVersionString">
     <string>100</string>
     </gap:config-file>
-    <gap:config-file platform="android" parent="/manifest/application">
-<activity android:launchMode="singleTop" />
-</gap:config-file>
+  
     <!--
         Define access to external domains.
         <access />            - a blank access tag denies access to all external resources.
