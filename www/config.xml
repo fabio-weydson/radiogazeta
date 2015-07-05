@@ -56,7 +56,7 @@
 
     <!-- Core plugins -->
 
-<gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
     <gap:plugin name="cordova-plugin-device" source="npm"/> 
     <gap:plugin name="cordova-plugin-file" source="npm" /> 
     <gap:plugin name="nl.x-services.plugins.toast"  /> 
@@ -71,8 +71,7 @@
     <gap:plugin name="cordova-plugin-splashscreen" source="npm"  /> 
     <gap:plugin name="cordova-plugin-statusbar" source="npm"  />
     <gap:plugin name="nl.x-services.plugins.socialsharing" /> 
-    <!-- <gap:plugin name="com.cordova.background-audio" /> -->
-<gap:plugin name="it.witek.cordova.plugin.background-mode" version="0.6.3" />
+    <gap:plugin name="it.witek.cordova.plugin.background-mode" />
 
 <!--       <gap:plugin name="org.apache.cordova.console" />
  -->  <!--   <gap:plugin name="org.apache.cordova.device" />
