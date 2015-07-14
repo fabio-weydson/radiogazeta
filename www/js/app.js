@@ -425,6 +425,11 @@
                         navigator.device.exitApp();
                     }
         }
+        $scope.BackgroundMode = function(){
+    
+            e.preventDefault();
+
+        }
 
 
         ons.ready(function() {
@@ -453,7 +458,7 @@
                     StatusBar.styleBlackOpaque();
         });
         
-        document.addEventListener("backbutton", $scope.CloseApp, true); 
+        document.addEventListener("backbutton", $scope.BackgroundMode, true); 
 
         document.addEventListener("offline", function() {
 
