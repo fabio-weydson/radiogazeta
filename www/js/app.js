@@ -437,7 +437,7 @@
             }
             cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, ticker: 'Entrando em segundo plano',  text:'Clique para abrir o aplicativo.'});
             cordova.plugins.backgroundMode.enable();
-            Called when background mode has been activated
+            //Called when background mode has been activated
             cordova.plugins.backgroundMode.onactivate = function () {
                 setTimeout(function () {
                     // Modify the currently displayed notification
