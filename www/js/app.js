@@ -300,6 +300,8 @@
                 songTitle = Artista + ' - ' + Musica;
                
                 $scope.track_check = $scope.limpa_str(songTitle.replace(/\s/g, ''));
+
+
             }).done(function(data) {
                 $scope.$apply(function() {
                     $scope.radioOptions.songTitle = songTitle;
@@ -310,7 +312,7 @@
                 if (result != null) {
                     $scope.ExibeBanner();
                 } else {
-                  if(track_atual!=$scope.track_check) {
+                  //if(track_atual!=$scope.track_check) {
                     $('.descurtir,.curtir').removeClass('active');
                     $scope.ExibeFavoritar = true;
                     // cordova.plugins.backgroundMode.configure({
@@ -340,7 +342,7 @@
                         });
                     });
                     
-                  } 
+                  //} 
                 }
               
             })
