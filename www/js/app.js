@@ -185,10 +185,10 @@
                        var texto = 'Clique para abrir o aplicativo.';
                     }
 
-            cordova.plugins.backgroundMode.configure({
-                        title:  $scope.radioOptions.Titulo,
-                        text: texto
-             });
+            // cordova.plugins.backgroundMode.configure({
+            //             title:  $scope.radioOptions.Titulo,
+            //             text: texto
+            //  });
 
             $('#jquery_jplayer_1').jPlayer("setMedia", stream);
             $scope.startRadio();
@@ -313,9 +313,9 @@
                   if(track_atual!=$scope.track_check) {
                     $('.descurtir,.curtir').removeClass('active');
                     $scope.ExibeFavoritar = true;
-                    cordova.plugins.backgroundMode.configure({
-                        title: $scope.radioOptions.songTitle
-                    });
+                    // cordova.plugins.backgroundMode.configure({
+                    //     title: $scope.radioOptions.songTitle
+                    // });
                      window.localStorage.setItem('track_atual', $scope.limpa_str(songTitle.replace(/\s/g, '')));
 
                     //var URLText = $scope.limpa_str($scope.radioOptions.Artista)+'+'+$scope.radioOptions.Musica.split(' ')[0];
@@ -435,28 +435,27 @@
             if(ons.platform.isIOS()){
                 $('.navigation-bar').css({'padding-top':"20px"});
             }
-            cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, ticker: 'Entrando em segundo plano',  text:'Clique para abrir o aplicativo.'});
-            cordova.plugins.backgroundMode.enable();
-            //Called when background mode has been activated
-            cordova.plugins.backgroundMode.onactivate = function () {
-                setTimeout(function () {
-                    // Modify the currently displayed notification
-                    if($scope.radioOptions.songTitle) {
-                       var texto = $scope.radioOptions.songTitle;
-                    } else {
-                       var texto = 'Clique para abrir o aplicativo.';
-                    }
-                    cordova.plugins.backgroundMode.configure({
-                        title:  $scope.radioOptions.Titulo,
-                        text: texto
+            // cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, ticker: 'Entrando em segundo plano',  text:'Clique para abrir o aplicativo.'});
+            // cordova.plugins.backgroundMode.enable();
+            // cordova.plugins.backgroundMode.onactivate = function () {
+            //     setTimeout(function () {
+            //         // Modify the currently displayed notification
+            //         if($scope.radioOptions.songTitle) {
+            //            var texto = $scope.radioOptions.songTitle;
+            //         } else {
+            //            var texto = 'Clique para abrir o aplicativo.';
+            //         }
+            //         cordova.plugins.backgroundMode.configure({
+            //             title:  $scope.radioOptions.Titulo,
+            //             text: texto
 
-                    });
-                }, 5000);
-            }
+            //         });
+            //     }, 5000);
+            // }
                     StatusBar.styleBlackOpaque();
         });
         
-        document.addEventListener("backbutton", $scope.BackgroundMode, true); 
+       // document.addEventListener("backbutton", $scope.BackgroundMode, true); 
 
         document.addEventListener("offline", function() {
 
