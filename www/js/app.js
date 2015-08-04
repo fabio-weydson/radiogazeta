@@ -93,6 +93,8 @@
 
     app.controller('radioController', function($scope, $sce, $interval, $timeout) {
 
+
+
  $('.bgbox img').width
         $scope.isPlaying = false;
         $scope.autoplay = false;
@@ -133,6 +135,17 @@
             ProximaArtista: '',
             ProximaMusica: ''
         }
+        $scope.radioOptions.songTitle = '';
+        $scope.URLCover = '';
+        $scope.URLText = '';
+
+       $timeout(function() {
+                  $scope.$watch('radioOptions.songTitle', function() {  
+            $('.descurtir,.curtir').removeClass('active');
+            $scope.ExibeFavoritar = true;
+        }, true);
+                }, 7000);
+       
 
         $scope.radioOptions.Titulo = $scope.radios_arr[$scope.lastradio].title;
         $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
@@ -165,7 +178,6 @@
         }).end();
 
         $scope.mudaRadio = function(idRadio) {
-             console.log("mudaRadio");
             $scope.lastradio = idRadio;
             $scope.isPlaying = false;
             $('#jquery_jplayer_1').jPlayer('stop');
@@ -271,20 +283,19 @@
         $scope.RefreshFaixa = function() {
             $scope.capa_antiga =  window.localStorage.getItem('capa_antiga');
 
-            var track_atual = window.localStorage.getItem('track_atual');
+            //var track_atual = window.localStorage.getItem('track_atual');
             var songTitle = '';
             var Artista = '';
             var Musica = '';
             var n = Math.floor(Math.random() * 9999) + 1;
-            console.log(n);
             var largura_capa = $('.capa').width();
 
             if (document.location.hostname == "localhost") {
-                var URLCover = 'http://localhost/gazeta/novo/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
+                $scope.URLCover = 'http://localhost/gazeta/novo/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
                 var URLCurrentSong = 'http://localhost/aplicativos/current_song.php?v=' + n;
                 $scope.URLNextSong = 'http://localhost/aplicativos/next_song.php?v=' + n;
             } else {
-                var URLCover = 'http://184.172.104.3/~fmgazeta/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
+                $scope.URLCover = 'http://184.172.104.3/~fmgazeta/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
                 var URLCurrentSong = 'http://184.172.104.3/~fmgazeta/player/current_song.php?v=' + n;
                 $scope.URLNextSong = 'http://184.172.104.3/~fmgazeta/player/next_song.php?v=' + n;
             }
@@ -299,7 +310,7 @@
                 }
                 songTitle = Artista + ' - ' + Musica;
                
-                $scope.track_check = $scope.limpa_str(songTitle.replace(/\s/g, ''));
+                //$scope.track_check = $scope.limpa_str(songTitle.replace(/\s/g, ''));
 
 
             }).done(function(data) {
@@ -308,22 +319,19 @@
                     $scope.radioOptions.Artista = Artista;
                     $scope.radioOptions.Musica = Musica;
                 });
-                var result = $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "teaser", "thomas", "andorinha", "gazeta fm", "diversos", "trilha", "vh", "fm", "ferreto", "2015"]);
+                var result = $scope.ExisteTexto($scope.radioOptions.songTitle.toLowerCase(), ["gazeta", "teaser", "thomas", "andorinha", "gazeta fm", "diversos", "trilha", "vh", "fm", "ferreto", "2015"]);
                 if (result != null) {
                     $scope.ExibeBanner();
                 } else {
                   //if(track_atual!=$scope.track_check) {
-                    $('.descurtir,.curtir').removeClass('active');
-                    $scope.ExibeFavoritar = true;
-                    cordova.plugins.backgroundMode.configure({
-                        title: $scope.radioOptions.songTitle
-                    });
-                     window.localStorage.setItem('track_atual', $scope.limpa_str(songTitle.replace(/\s/g, '')));
+                   
+                    //window.localStorage.setItem('track_atual', $scope.limpa_str(songTitle.replace(/\s/g, '')));
 
                     //var URLText = $scope.limpa_str($scope.radioOptions.Artista)+'+'+$scope.radioOptions.Musica.split(' ')[0];
-                    var URLText = $scope.limpa_str($scope.radioOptions.Artista);
+                    $scope.URLText = $scope.limpa_str($scope.radioOptions.Artista);
+                    $scope.radioOptions.albumArt = $scope.URLCover + $scope.URLText; 
                     $scope.$apply(function() {
-                     $scope.radioOptions.albumArt = URLCover + URLText;
+                   
                         /* FADE CAPA */
                         //  $timeout(function(){
 
@@ -341,6 +349,9 @@
                             $scope.radioOptions.albumArt = 'images/radio/cover.png';
                         });
                     });
+                    //  cordova.plugins.backgroundMode.configure({
+                    //     title: $scope.radioOptions.songTitle
+                    // });
                     
                   //} 
                 }
@@ -392,6 +403,7 @@
         }
 
         $scope.AbrePedidos = function(){
+            $scope.teste = 'kkkkk';
           pedidos.show();
         }
          $scope.FechaPedidos = function(){
@@ -433,6 +445,7 @@
             e.preventDefault();
 
         }
+
 
 
         ons.ready(function() {
