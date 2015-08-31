@@ -106,21 +106,25 @@
         $scope.radios_arr = [{
             id: '0',
             title: 'Cuiabá 99.9',
+            menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc6.dnip.com.br:13250'
         }, {
             id: '1',
             title: 'Alta Floresta 95.5',
+            menu: 'Alta Floresta',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:12575'
         }, {
             id: '2',
             title: 'Barra do Garças 96.1',
+            menu: 'Barra do Garças',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:15165'
         }, {
             id: '3',
             title: 'Poxoréu 90.9',
+            menu: 'Poxoréu',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:11540'
         }];
@@ -259,21 +263,26 @@
             for (var i = 0, l = from.length; i < l; i++) {
                 str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
             }
-            str = str.replace(/[^a-z0-9 -]/g, '').replace('  ', '+').replace('-', '').replace(' ', '+'); // remove invalid chars
+            //str = str.replace(/[^a-z0-9 -]/g, '').replace('  ', '+').replace('-', '').replace(' ', '+'); 
             return str;
         }
 
 
 
-        $scope.curtir = function() {
-            $('.descurtir').removeClass('active');
-            $('.curtir').addClass('active');
-            window.plugins.toast.show('Obrigado por curtir essa música!', 'long', 'center', null, null);
-        }
-        $scope.descurtir = function() {
-            $('.curtir').removeClass('active');
-            $('.descurtir').addClass('active');
-            window.plugins.toast.show('Descurtido. Obrigado pelo seu voto!', 'long', 'center', null, null);
+        $scope.curtir = function(valor) {
+
+            var jqxhr = $.get( "http://179.188.17.9/~fmgazetacom/player/curtir_app.php?musica="+$scope.Base64($scope.radioOptions.songTitle), function(data) {
+                console.log(data);
+              if(valor=='sim') {
+                $('.descurtir').removeClass('active');
+                $('.curtir').addClass('active');
+                window.plugins.toast.show('Obrigado por curtir essa música!', 'long', 'center', null, null);
+            } else if (valor=='nao') {
+                $('.curtir').removeClass('active');
+                $('.descurtir').addClass('active');
+                window.plugins.toast.show('Descurtido. Obrigado pelo seu voto!', 'long', 'center', null, null);
+            }
+            })
         }
 
         $scope.renderHtml = function(htmlCode) {
@@ -295,9 +304,9 @@
                 var URLCurrentSong = 'http://localhost/aplicativos/current_song.php?v=' + n;
                 $scope.URLNextSong = 'http://localhost/aplicativos/next_song.php?v=' + n;
             } else {
-                $scope.URLCover = 'http://184.172.104.3/~fmgazeta/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
-                var URLCurrentSong = 'http://184.172.104.3/~fmgazeta/player/current_song.php?v=' + n;
-                $scope.URLNextSong = 'http://184.172.104.3/~fmgazeta/player/next_song.php?v=' + n;
+                $scope.URLCover = 'http://179.188.17.9/~fmgazetacom/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
+                var URLCurrentSong = 'http://179.188.17.9/~fmgazetacom/player/current_song.php?v=' + n;
+                $scope.URLNextSong = 'http://179.188.17.9/~fmgazetacom/player/next_song.php?v=' + n;
             }
 
             $.get(URLCurrentSong, function(data) {
@@ -319,7 +328,11 @@
                     $scope.radioOptions.Artista = Artista;
                     $scope.radioOptions.Musica = Musica;
                 });
-                var result = $scope.ExisteTexto($scope.radioOptions.songTitle.toLowerCase(), ["gazeta", "teaser", "thomas", "andorinha", "gazeta fm", "diversos", "trilha", "vh", "fm", "ferreto", "2015"]);
+                var result = $scope.ExisteTexto($scope.radioOptions.songTitle.toLowerCase(), 
+                    ["gazeta", "ch ","balança", "teaser", "thomas",
+                     "andorinha", "gazeta fm", "diversos",
+                 "trilha", "vh", "fm", "ferreto", "andorinha"]);
+
                 if (result != null) {
                     $scope.ExibeBanner();
                 } else {
@@ -328,8 +341,9 @@
                     //window.localStorage.setItem('track_atual', $scope.limpa_str(songTitle.replace(/\s/g, '')));
 
                     //var URLText = $scope.limpa_str($scope.radioOptions.Artista)+'+'+$scope.radioOptions.Musica.split(' ')[0];
-                    $scope.URLText = $scope.limpa_str($scope.radioOptions.Artista);
-                    $scope.radioOptions.albumArt = $scope.URLCover + $scope.URLText; 
+                    $scope.URLText = $scope.Base64($scope.limpa_str($scope.radioOptions.Artista));
+                    //$scope.radioOptions.albumArt = $scope.URLCover + $scope.URLText; 
+                    $scope.radioOptions.albumArt = 'http://179.188.17.9/~fmgazetacom/player/capa_app.php?artista='+$scope.URLText;
                     $scope.$apply(function() {
                    
                         /* FADE CAPA */
@@ -438,10 +452,15 @@
                         navigator.device.exitApp();
                     }
         }
+
+        $scope.Base64 = function(string){
+            var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+            var encodedString = Base64.encode(string);
+            return encodedString;
+        }
+
         $scope.BackgroundMode = function(){
 
-
-    
             e.preventDefault();
 
         }
