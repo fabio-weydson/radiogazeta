@@ -8,7 +8,7 @@
 (function() {
     'use strict';
 
-    var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio',  'angular-jwplayer', 'ngAnimate']);
+    var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio',  'angular-jwplayer']);
 
     // Filter to convert HTML content to string by removing all HTML tags
     app.filter('htmlToPlaintext', function() {
@@ -93,8 +93,6 @@
 
     app.controller('radioController', function($scope, $sce, $interval, $timeout) {
 
-
-
  $('.bgbox img').width
         $scope.isPlaying = false;
         $scope.autoplay = false;
@@ -106,33 +104,28 @@
         $scope.radios_arr = [{
             id: '0',
             title: 'Cuiabá 99.9',
-            menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc6.dnip.com.br:13250'
         }, {
             id: '1',
             title: 'Alta Floresta 95.5',
-            menu: 'Alta Floresta',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:12575'
         }, {
             id: '2',
             title: 'Barra do Garças 96.1',
-            menu: 'Barra do Garças',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:15165'
         }, {
             id: '3',
             title: 'Poxoréu 90.9',
-            menu: 'Poxoréu',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:11540'
         }];
 
         $scope.radioOptions = {
-            Background: true,
             Titulo: '',
-            albumArt: 'images/radio/cover.png?v=3',
+            albumArt: 'images/radio/cover.png',
             Artista: '',
             Musica: '',
             songTitle: '',
@@ -140,28 +133,6 @@
             ProximaArtista: '',
             ProximaMusica: ''
         }
-        $scope.keywords = ["gazeta", "ch ","balança", "teaser", "thomas",
-                     "andorinha", "gazeta fm", "diversos", "chamada",
-                    "trilha", "vh", "fm", "ferreto", "andorinha"];
-                    
-        $scope.URLCover = 'http://179.188.17.9/~fmgazetacom/player/capa_app.php?artista=';
-        $scope.radioOptions.songTitle = '';
-        $scope.URLText = '';
-        $scope.Status = 'stopped';
-        $scope.proximaFaixa = '';
-        $scope.atualFaixa = '';
-        $scope.TMPalbumArt = '';
-        $scope.BuscaAjax = false;
-
-       
-
-       $timeout(function() {
-            $scope.$watch('radioOptions.songTitle', function() {  
-                $('.descurtir,.curtir').removeClass('active');
-                $scope.ExibeFavoritar = true;
-            }, true);
-        }, 7000);
-       
 
         $scope.radioOptions.Titulo = $scope.radios_arr[$scope.lastradio].title;
         $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
@@ -182,32 +153,21 @@
                 console.log("Player pronto");
             },
             play: function() {
-                $scope.Status = 'playing';
+                //$scope.startRadio();
             },
             pause: function() {
-                $scope.Status = 'paused';
             },
             stop: function() {
-                $scope.Status = 'stopped';
             },
             ended: function() {
-                
+                // $control.removeClass(cls);
             }
         }).end();
-        
-        $scope.$watch('proximaFaixa', function(newValue, oldValue) {
-            if(newValue==oldValue) {
-               console.log('igual');
-            }    else {
-                console.log('diferente');
-            }
-        });
 
         $scope.mudaRadio = function(idRadio) {
-
+             console.log("mudaRadio");
             $scope.lastradio = idRadio;
             $scope.isPlaying = false;
-            $scope.radioOptions.albumArt = 'images/radio/cover.png?v=4';
             $('#jquery_jplayer_1').jPlayer('stop');
 
             var stream = {
@@ -219,26 +179,37 @@
 
             $scope.radioOptions.Titulo = stream.title;
 
+             if($scope.radioOptions.songTitle) {
+                       var texto = $scope.radioOptions.songTitle;
+                    } else {
+                       var texto = 'Clique para abrir o aplicativo.';
+                    }
+
+            cordova.plugins.backgroundMode.configure({
+                        title:  $scope.radioOptions.Titulo,
+                        text: texto
+             });
+
             $('#jquery_jplayer_1').jPlayer("setMedia", stream);
             $scope.startRadio();
             return false;
         }
 
         $scope.startRadio = function() {
-            console.log($scope.lastradio+'_'+$scope.BuscaAjax);
             if ($scope.lastradio == '0') {
-                console.log('asdsad2222');
-                $scope.BuscaAjax = true;
-               
+                $timeout($scope.RefreshFaixa, 10);
+                $interval(function() {
+                    if ($scope.lastradio == '0') {
+                        $scope.RefreshFaixa();
+                          $scope.NextFaixa();
+                    }
+                }, 50000);
             } else {
-                $scope.BuscaAjax = false;
-                $scope.radioOptions.Background = false;
                 $scope.radioOptions.ProximaMusica = false;
                 $scope.radioOptions.Artista = "";
                 $scope.radioOptions.Musica = $scope.radioOptions.Titulo;
-
+               // $scope.radioOptions.albumArt = 'images/radio/logo_grande.png';
                 $scope.ExibeBanner();
-                $scope.ExibeFavoritar = false;
             }
             if ($scope.isPlaying) {
                 $scope.isPlaying = false;
@@ -253,7 +224,7 @@
                     $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
 
                     $scope.isPlaying = true;
-                }, 5000);
+                }, 7000);
             }
             return false;
         }
@@ -276,31 +247,21 @@
             for (var i = 0, l = from.length; i < l; i++) {
                 str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
             }
-            //str = str.replace(/[^a-z0-9 -]/g, '').replace('  ', '+').replace('-', '').replace(' ', '+'); 
+            str = str.replace(/[^a-z0-9 -]/g, '').replace('  ', '+').replace('-', '').replace(' ', '+'); // remove invalid chars
             return str;
         }
 
-        $scope.curtir = function(valor) {
-            if($('.botoes.curtir').attr('active')=='true'){
-            if(window.localStorage.getItem('curtido')!=$scope.Base64($scope.radioOptions.songTitle)) {
-                if(valor=='sim') {
-                var voto = 'positivo';
-                $('.descurtir').removeClass('active');
-                $('.curtir').addClass('active');
-                window.plugins.toast.show('Obrigado por curtir essa música!', 'long', 'center', null, null);
-            } else if (valor=='nao') {
-                var voto = 'negativo';
-                $('.curtir').removeClass('active');
-                $('.descurtir').addClass('active');
-                window.plugins.toast.show('Descurtido. Obrigado pelo seu voto!', 'long', 'center', null, null);
-            }
-            var jqxhr = $.get( "http://179.188.17.9/~fmgazetacom/player/curtir_app.php?voto="+voto+"&musica="+$scope.Base64($scope.radioOptions.songTitle), function(data) {
-                window.localStorage.setItem('curtido', $scope.Base64($scope.radioOptions.songTitle));
-            })
-            } else {
-                window.plugins.toast.show('Você já curtiu essa música!', 'long', 'center', null, null);
-            }
-            }
+
+
+        $scope.curtir = function() {
+            $('.descurtir').removeClass('active');
+            $('.curtir').addClass('active');
+            window.plugins.toast.show('Obrigado por curtir essa música!', 'long', 'center', null, null);
+        }
+        $scope.descurtir = function() {
+            $('.curtir').removeClass('active');
+            $('.descurtir').addClass('active');
+            window.plugins.toast.show('Descurtido. Obrigado pelo seu voto!', 'long', 'center', null, null);
         }
 
         $scope.renderHtml = function(htmlCode) {
@@ -308,21 +269,26 @@
         };
     
         $scope.RefreshFaixa = function() {
+            $scope.capa_antiga =  window.localStorage.getItem('capa_antiga');
+
+            var track_atual = window.localStorage.getItem('track_atual');
             var songTitle = '';
             var Artista = '';
             var Musica = '';
-           
             var n = Math.floor(Math.random() * 9999) + 1;
+            console.log(n);
             var largura_capa = $('.capa').width();
 
             if (document.location.hostname == "localhost") {
+                var URLCover = 'http://localhost/gazeta/novo/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
                 var URLCurrentSong = 'http://localhost/aplicativos/current_song.php?v=' + n;
                 $scope.URLNextSong = 'http://localhost/aplicativos/next_song.php?v=' + n;
             } else {
-                var URLCurrentSong = 'http://179.188.17.9/~fmgazetacom/player/current_song.php?v=' + n;
-                $scope.URLNextSong = 'http://179.188.17.9/~fmgazetacom/player/next_song.php?v=' + n;
+                var URLCover = 'http://184.172.104.3/~fmgazeta/player/cover.php?w=' + largura_capa + '&h=' + largura_capa + '&filename=';
+                var URLCurrentSong = 'http://184.172.104.3/~fmgazeta/player/current_song.php?v=' + n;
+                $scope.URLNextSong = 'http://184.172.104.3/~fmgazeta/player/next_song.php?v=' + n;
             }
-            if($scope.BuscaAjax==true) {
+
             $.get(URLCurrentSong, function(data) {
                 var faixa = data.split(" - ");
                 if (faixa[1] != undefined) {
@@ -333,68 +299,66 @@
                 }
                 songTitle = Artista + ' - ' + Musica;
                
+                $scope.track_check = $scope.limpa_str(songTitle.replace(/\s/g, ''));
             }).done(function(data) {
                 $scope.$apply(function() {
-
                     $scope.radioOptions.songTitle = songTitle;
                     $scope.radioOptions.Artista = Artista;
                     $scope.radioOptions.Musica = Musica;
-                    $scope.atualFaixa = $scope.Base64($scope.radioOptions.Artista);
                 });
-                var result = $scope.ExisteTexto($scope.radioOptions.songTitle.toLowerCase(), 
-                    $scope.keywords);
-
+                var result = $scope.ExisteTexto(songTitle.toLowerCase(), ["gazeta", "teaser", "thomas", "andorinha", "gazeta fm", "diversos", "trilha", "vh", "fm", "ferreto", "2015"]);
                 if (result != null) {
                     $scope.ExibeBanner();
                 } else {
-                        $scope.radioOptions.Background = false;
-                        $scope.URLText = $scope.Base64($scope.limpa_str($scope.radioOptions.Artista));
-                          $.get($scope.URLCover+$scope.URLText, function(data) {
-                            console.log(data);
-                            $scope.TMPalbumArt = data;
-                             $timeout(function(){
-                                $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
-                                    $scope.radioOptions.albumArt =  data;
-                                    console.log('vai viado')
-                                }).delay(5000).fadeOut('slow')}, 1000);
-                         });
+                  if(track_atual!=$scope.track_check) {
+                    $('.descurtir,.curtir').removeClass('active');
+                    $scope.ExibeFavoritar = true;
+                    cordova.plugins.backgroundMode.configure({
+                        title: $scope.radioOptions.songTitle
+                    });
+                     window.localStorage.setItem('track_atual', $scope.limpa_str(songTitle.replace(/\s/g, '')));
 
-                        //$scope.TMPalbumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
-
-                       
-
-
+                    //var URLText = $scope.limpa_str($scope.radioOptions.Artista)+'+'+$scope.radioOptions.Musica.split(' ')[0];
+                    var URLText = $scope.limpa_str($scope.radioOptions.Artista);
                     $scope.$apply(function() {
-                        $("span.capa img").error(function() {
-                            $scope.radioOptions.Background = false;
-                            $scope.radioOptions.albumArt = 'images/radio/cover.png?v=2';
+                     $scope.radioOptions.albumArt = URLCover + URLText;
+                        /* FADE CAPA */
+                        //  $timeout(function(){
 
+                        //   $('.mask').fadeOut('slow', function(){
+                        //       window.localStorage.setItem('capa_antiga', $scope.radioOptions.albumArt);
+
+                        //   }).fadeIn('normal');
+                        // }, 5000);
+
+                        //  $timeout(function(){
+                        //   $('#controls').fadeOut('slow');
+                        // }, 20000);
+
+                        $("span.capa img").error(function() {
+                            $scope.radioOptions.albumArt = 'images/radio/cover.png';
                         });
                     });
-
+                    
+                  } 
                 }
-           
+              
             })
-            $scope.NextFaixa();
-            }
         }
         $scope.ExibeBanner = function (){
             $scope.ExibeFavoritar = false;
             var b = Math.floor(Math.random() * 2) + 1; 
-            $scope.radioOptions.Background = false;
             $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
               
         }
         $scope.NextFaixa = function() {
-            var songTitle = '';
+           var songTitle = '';
             var Artista = '';
             var Musica = '';
-            var n = Math.floor(Math.random() * 999) + 1;
-            console.log($scope.BuscaAjax);
-           if($scope.BuscaAjax==true) {
-            $.get($scope.URLNextSong, function(data) {
-              
-            }).done(function(data) {
+           var n = Math.floor(Math.random() * 999) + 1;
+          
+
+          $.get($scope.URLNextSong, function(data) {
                 var faixa = data.split(" - ");
                 if (faixa[1] != undefined) {
                     Artista = faixa[1];
@@ -402,31 +366,16 @@
                 if (faixa[0] != undefined) {
                     Musica = faixa[0];
                 }
-
                 songTitle = Artista + ' - ' + Musica;
-                var result = $scope.ExisteTexto(songTitle.toLowerCase(), 
-                $scope.keywords);
-
-                if (result == null) {
+                window.localStorage.setItem('proximaFaixa', $scope.limpa_str(songTitle.replace(/\s/g, '')));
+            }).done(function(data) {
                 $scope.$apply(function() {
                     $scope.radioOptions.ProximaArtista = Artista;
                     $scope.radioOptions.ProximaMusica = Musica;
                 });
-                }
             })
         }
-        }
-        $scope.RefreshFaixa();
-        $scope.NextFaixa();
-
-        $timeout(function(){
-            $scope.RefreshFaixa();
-            $scope.NextFaixa();
-            console.log('asdsad');
-            $interval(function() {
-                $scope.RefreshFaixa();
-            }, 40000)
-        }, 5000);
+  
         $scope.shareMusica = function() {
             var subject = 'Radio ' + $scope.radioOptions.Titulo;
             if($scope.radioOptions.songTitle) {
@@ -466,7 +415,7 @@
             .fail(function() {
               alert( "Ocorreu um erro, tente novamente." );
             });
-        }  
+        }
         $scope.CloseApp = function(){
             $('#jquery_jplayer_1').jPlayer('stop');
              if (navigator.app) {
@@ -475,26 +424,20 @@
                         navigator.device.exitApp();
                     }
         }
-
-        $scope.Base64 = function(string){
-            var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
-            var encodedString = Base64.encode(string);
-            return encodedString;
-        }
-
         $scope.BackgroundMode = function(){
-
+    
             e.preventDefault();
 
         }
 
-        ons.ready(function() {
 
+        ons.ready(function() {
             if(ons.platform.isIOS()){
                 $('.navigation-bar').css({'padding-top':"20px"});
             }
             cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, ticker: 'Entrando em segundo plano',  text:'Clique para abrir o aplicativo.'});
             cordova.plugins.backgroundMode.enable();
+            //Called when background mode has been activated
             cordova.plugins.backgroundMode.onactivate = function () {
                 setTimeout(function () {
                     // Modify the currently displayed notification
@@ -513,7 +456,7 @@
                     StatusBar.styleBlackOpaque();
         });
         
-       document.addEventListener("backbutton", $scope.BackgroundMode, true); 
+        document.addEventListener("backbutton", $scope.BackgroundMode, true); 
 
         document.addEventListener("offline", function() {
 
@@ -543,5 +486,7 @@
                 return '';
             }
         }
-    })
+    });
+
+
 })();

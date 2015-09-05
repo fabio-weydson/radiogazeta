@@ -442,6 +442,11 @@ map.fullscreen {
   max-width: 350px;
   margin: 0 auto;
 }
+.radiobox .capa .reserva {
+  position:absolute;
+  top: 0;
+  left: 0;
+}
 @media screen and (min-width: 768px) {
  .radiobox {
    top:10%;
@@ -620,7 +625,8 @@ img.bg {
 .bgbox {
   height: 100%;
   width: 100%!important;
-  z-index: -1;
+  z-index: 0;
+  background-color: #000;
   position: absolute;
   top: 0;
   background-size: auto 100%;
@@ -655,11 +661,11 @@ img.bg {
 }
 */
 .bgbox img.bg,.bgbox .mask {
-  width: 200%;
+  width: auto;
   height: 100%;
   top: 0;
   bottom: 0;
-  left: -50%;
+  left: -38%;
   right: 0;
   position: fixed;
   z-index: -2;
@@ -1587,9 +1593,10 @@ span.capa {
     margin-top: 48px;
     width: 70%;
     overflow: hidden;
+    position: relative;
 }
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-    transition: all linear 0.5s;
+/* .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+    transition: all linear 1s;
     display: block;
 }
 
@@ -1598,7 +1605,19 @@ span.capa {
 }
 
 .animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active {
-    opacity: 0.5;
+    opacity: 1;
+} */
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+.cssFade {
+    /* transition: 2s linear all; */
+    opacity: 1;
+    background-color: #000;
+}
+.cssFade.ng-hide {
+    opacity: 0;
 }
 ons-tab.ng-isolate-scope.active {
     /* background-color: #3F4144 !important; */
@@ -1611,4 +1630,13 @@ a.botoes[active=false] span {
 }
 .platform-ios .navigation-bar {
     padding-top:20px !important;
+}
+div#tmp_capa {
+    display: none;
+}
+div#radio {
+    background: #000;
+    height: 100%;
+    width: 100%;
+    background-size: auto 100%;
 }

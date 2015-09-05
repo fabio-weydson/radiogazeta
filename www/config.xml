@@ -74,6 +74,8 @@
     <gap:plugin name="cordova-plugin-statusbar" source="npm"  />
     <gap:plugin name="nl.x-services.plugins.socialsharing" /> 
     <gap:plugin name="it.witek.cordova.plugin.background-mode" />
+    <gap:plugin name="org.apache.cordova.geolocation" />
+
 
 <!--       <gap:plugin name="org.apache.cordova.console" />
  -->  <!--   <gap:plugin name="org.apache.cordova.device" />
