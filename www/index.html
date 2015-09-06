@@ -56,7 +56,7 @@
           <div class="ball"></div>
            <p class="song-title"><marquee id="titulo" class="titulo" direction="left" scrolldelay="4" scrollamount="2" behavior="slide">{{ radioOptions.Musica | limitTo: 32 }}</marquee><span class="artista">{{ radioOptions.Artista | limitTo: 32 }}</span></p>
           <p id="stream-time" class="jp-current-time"> &#xA0;</p>
-            <span class="capa" ng-click="exibeControles()"><img ng-src="{{ radioOptions.albumArt }}" class="animate-show" fade-in><img ng-src="{{ TMPalbumArt }}" class="reserva"></span>
+            <span class="capa" ng-click="exibeControles()"><img ng-src="{{ radioOptions.albumArt }}" class="animate-show" id="capa" fade-in><img ng-src="{{ TMPalbumArt }}" class="reserva"></span>
             
             <!-- <p id="stream-time">{{ radio.currentTime | SecondsToTimeString }}</p>   -->          
           </ons-col>
@@ -85,7 +85,7 @@
           <ons-col width="32%"></ons-col>
         </ons-row>
       </div>
-      <div class="bgbox blurs bg" style="background-image:url('{{radioOptions.albumArt}}')"  ng-if="!radioOptions.Background"  fade-in>
+      <div class="bgbox blurs bg" id="capa_fundo" style="background-image:url('{{radioOptions.albumArt}}')"  ng-if="!radioOptions.Background"  fade-in>
 <!--         <img ng-src="{{ capa_antiga }}"  img-cache  class="blurs bg animate-show mask" fade-in /> --> 
 
        <div class="bgbox blurs cssFade" style="background-image:url('{{TMPalbumArt}}')" id="tmp_capa" ></div> 

@@ -141,7 +141,7 @@
             ProximaMusica: ''
         }
         $scope.keywords = ["gazeta", "ch ","balança", "teaser", "thomas",
-                     "andorinha", "gazeta fm", "diversos", "chamada",
+                     "andorinha", "gazeta fm", "diversos", "thomaz", "chamada",
                     "trilha", "vh", "fm", "ferreto", "andorinha"];
                     
         $scope.URLCover = 'http://179.188.17.9/~fmgazetacom/player/capa_app.php?artista=';
@@ -207,7 +207,7 @@
 
             $scope.lastradio = idRadio;
             $scope.isPlaying = false;
-            $scope.radioOptions.albumArt = 'images/radio/cover.png?v=4';
+           
             $('#jquery_jplayer_1').jPlayer('stop');
 
             var stream = {
@@ -225,9 +225,7 @@
         }
 
         $scope.startRadio = function() {
-            console.log($scope.lastradio+'_'+$scope.BuscaAjax);
             if ($scope.lastradio == '0') {
-                console.log('asdsad2222');
                 $scope.BuscaAjax = true;
                
             } else {
@@ -349,13 +347,16 @@
                 } else {
                         $scope.radioOptions.Background = false;
                         $scope.URLText = $scope.Base64($scope.limpa_str($scope.radioOptions.Artista));
-                          $.get($scope.URLCover+$scope.URLText, function(data) {
-                            console.log(data);
+                          $.get($scope.URLCover+$scope.URLText+'&v=' + n, function(data) {
+                            $scope.$apply(function() {
                             $scope.TMPalbumArt = data;
-                             $timeout(function(){
+                            });
+                        
+                            $timeout(function(){
                                 $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
-                                    $scope.radioOptions.albumArt =  data;
-                                    console.log('vai viado')
+                                    $scope.$apply(function() {
+                                     $scope.radioOptions.albumArt =  data;
+                                 });
                                 }).delay(5000).fadeOut('slow')}, 1000);
                          });
 
@@ -390,7 +391,6 @@
             var Artista = '';
             var Musica = '';
             var n = Math.floor(Math.random() * 999) + 1;
-            console.log($scope.BuscaAjax);
            if($scope.BuscaAjax==true) {
             $.get($scope.URLNextSong, function(data) {
               
@@ -422,7 +422,6 @@
         $timeout(function(){
             $scope.RefreshFaixa();
             $scope.NextFaixa();
-            console.log('asdsad');
             $interval(function() {
                 $scope.RefreshFaixa();
             }, 40000)
