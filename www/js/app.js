@@ -8,7 +8,7 @@
 (function() {
     'use strict';
 
-    var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio',  'angular-jwplayer', 'ngAnimate']);
+    var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio',  'angular-jwplayer']);
 
     // Filter to convert HTML content to string by removing all HTML tags
     app.filter('htmlToPlaintext', function() {
@@ -133,8 +133,8 @@
             Background: true,
             Titulo: '',
             albumArt: 'images/radio/cover.png?v=3',
-            Artista: '',
-            Musica: '',
+            Artista: 'Carregando...',
+            Musica: 'Aguarde',
             songTitle: '',
             currentTime: '',
             ProximaArtista: '',
@@ -150,7 +150,7 @@
         $scope.Status = 'stopped';
         $scope.proximaFaixa = '';
         $scope.atualFaixa = '';
-        $scope.TMPalbumArt = '';
+        $scope.TMPalbumArt = 'images/radio/cover.png?v=3';
         $scope.BuscaAjax = false;
 
        
@@ -356,6 +356,10 @@
                                 $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
                                     $scope.$apply(function() {
                                      $scope.radioOptions.albumArt =  data;
+                                    // var target = angular.element(document.querySelector('#capa'));
+                                    // var target2 =  angular.element(document.querySelector('#canvas'));
+                                    
+                                    // stackBoxBlurCanvasRGB(target2, 0, 0, 500, 375, 8, 1);
                                  });
                                 }).delay(5000).fadeOut('slow')}, 1000);
                          });
@@ -385,6 +389,16 @@
             $scope.radioOptions.Background = false;
             $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
               
+        }
+        $scope.ToBase64 = function(url) {
+ 
+                var canvas = document.createElement('CANVAS');
+                var ctx = canvas.getContext('2d');
+                canvas.height = this.height;
+                canvas.width = this.width;
+                ctx.drawImage(this,0,0);
+                var dataURL = canvas.toDataURL('image/png');
+                console.log(dataURL);
         }
         $scope.NextFaixa = function() {
             var songTitle = '';
@@ -433,8 +447,8 @@
             } else {
                var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT #redegazeta";
             }
-            var imagem = 'http://i.imgur.com/jsHElO0.jpg';
-            //var imagem = '';
+            //var imagem = 'http://i.imgur.com/jsHElO0.jpg';
+            var imagem = $scope.radioOptions.albumArt;
             var link = 'http://bit.ly/1LThHb0';
             window.plugins.socialsharing.share(message, subject, imagem, link);
         }

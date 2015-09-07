@@ -632,12 +632,15 @@ img.bg {
   background-size: auto 100%;
   overflow: hidden;
   background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+}
+.blurs {
   filter: url(blur.svg#blur); 
   -webkit-filter: blur(6px); 
   filter: blur(6px); 
-  background-repeat: no-repeat;
-  opacity: 0.4; 
   filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='6');
+
 }
 /*
 .bgbox img.bg {
