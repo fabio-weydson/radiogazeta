@@ -387,7 +387,13 @@
             $scope.ExibeFavoritar = false;
             var b = Math.floor(Math.random() * 2) + 1; 
             $scope.radioOptions.Background = false;
-            $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
+            $scope.TMPalbumArt = 'images/banners/'+b+'.jpg';
+            $timeout(function(){
+                                $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
+                                    $scope.$apply(function() {
+                                    $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
+                                 });
+                                }).delay(5000).fadeOut('slow')}, 1000);
               
         }
         $scope.ToBase64 = function(url) {
@@ -447,8 +453,8 @@
             } else {
                var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT #redegazeta";
             }
-            //var imagem = 'http://i.imgur.com/jsHElO0.jpg';
-            var imagem = $scope.radioOptions.albumArt;
+            var imagem = 'http://i.imgur.com/jsHElO0.jpg';
+            //var imagem = $scope.radioOptions.albumArt;
             var link = 'http://bit.ly/1LThHb0';
             window.plugins.socialsharing.share(message, subject, imagem, link);
         }
