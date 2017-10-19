@@ -88,6 +88,31 @@
             }
         }
     })
+    app.directive("scrollableTab",function($compile) {
+    function link($scope, element, attrs) {
+        debugger;
+        $(element).find("ons-tab .tab-bar__item").wrapAll("<div class='allLinks'></div>");
+
+        var myScroll = $compile("<ion-scroll class='myScroll' dir='ltr' zooming='true' direction='x' style='width: 100%; height: 50px'></ion-scroll>")($scope);
+        
+        $(element).find('.allLinks').append(myScroll);
+        $(element).find(myScroll).find('.scroll').append($('.allLinks a'));
+        $(element).find(myScroll).find("a")
+            .wrapAll("<div class='links' style='min-width: 100%'></div>");
+
+        $(element).on("ready",function(){
+            debugger;
+        });
+        $(element).on('$destroy', function() {
+        });
+
+    }
+
+    return {
+        restrict: 'A',
+        link:link
+    }
+})
 
     // Radio Controller
 
@@ -105,28 +130,48 @@
         }
         $scope.radios_arr = [{
             id: '0',
-            title: 'Cuiabá 99.9',
+            title: 'Gazeta Cuiabá 99.9',
             menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc6.dnip.com.br:13250'
+            ip: 'sc6.dnip.com.br:13250',
+            logo: 'logo_xx.png'
         }, {
             id: '1',
-            title: 'Alta Floresta 95.5',
+            title: 'Gazeta Alta Floresta 95.5',
             menu: 'Alta Floresta',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:12575'
+            ip: 'sc4.dnip.com.br:12575',
+             logo: 'logo_xx.png'
         }, {
             id: '2',
-            title: 'Barra do Garças 96.1',
+            title: 'Gazeta Barra do Garças 96.1',
             menu: 'Barra do Garças',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:15165'
+            ip: 'sc4.dnip.com.br:15165',
+            logo: 'logo_xx.png'
         }, {
             id: '3',
-            title: 'Poxoréu 90.9',
+            title: 'Gazeta Poxoréu 90.9',
             menu: 'Poxoréu',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:11540'
+            ip: 'sc4.dnip.com.br:11540',
+            logo: 'logo_xx.png'
+        }
+        , {
+            id: '4',
+            title: 'Vila Real',
+            menu: 'Vila Real',
+            icon: 'ion-ios7-calendar-outline',
+            ip: 'sc5.dnip.com.br:9374',
+            logo: '4.png'
+        }
+        , {
+            id: '5',
+            title: 'Cultura FM',
+            menu: 'Cultura FM',
+            icon: 'ion-ios7-calendar-outline',
+            ip: 'sc4.dnip.com.br:11260',
+            logo: '5.png'
         }];
 
         $scope.radioOptions = {
@@ -136,7 +181,7 @@
             Artista: 'Carregando...',
             Musica: 'Aguarde',
             songTitle: '',
-            currentTime: '',
+            currentTime: '', 
             ProximaArtista: '',
             ProximaMusica: ''
         }
@@ -144,7 +189,7 @@
                      "andorinha", "gazeta fm", "diversos", "thomaz", "chamada",
                     "trilha", "vh", "fm", "ferreto", "andorinha"];
                     
-        $scope.URLCover = 'http://179.188.17.9/~fmgazetacom/player/capa_app.php?artista=';
+        $scope.URLCover = 'http://helloradio.com.br/radios/api/cover.php?w=180&h=180&filename=';
         $scope.radioOptions.songTitle = '';
         $scope.URLText = '';
         $scope.Status = 'stopped';
@@ -216,6 +261,7 @@
             };
             window.localStorage.setItem('lastradio', $scope.radios_arr[idRadio].id);
             window.localStorage.setItem('autoplay', true);
+            $scope.logo = $scope.radios_arr[idRadio].logo;
 
             $scope.radioOptions.Titulo = stream.title;
 
@@ -227,8 +273,8 @@
         $scope.startRadio = function() {
             if ($scope.lastradio == '0') {
                 $scope.BuscaAjax = true;
-               
-            } else {
+                 $scope.ExibeFavoritar = false;
+             } else {
                 $scope.BuscaAjax = false;
                 $scope.radioOptions.Background = false;
                 $scope.radioOptions.ProximaMusica = false;
@@ -244,7 +290,7 @@
 
                 $('#jquery_jplayer_1').jPlayer('stop');
             } else {
-                $('#jquery_jplayer_1').jPlayer('play');
+                $('#jquery_jplayer_1').jPlayer('play',0);
                 $scope.buttonIcon = '<img src="images/load.gif">';
 
                 $timeout(function() {
@@ -347,26 +393,22 @@
                 } else {
                         $scope.radioOptions.Background = false;
                         $scope.URLText = $scope.Base64($scope.limpa_str($scope.radioOptions.Artista));
-                          $.get($scope.URLCover+$scope.URLText+'&v=' + n, function(data) {
-                            $scope.$apply(function() {
-                            $scope.TMPalbumArt = data;
-                            });
+                         //  $.get($scope.URLCover+$scope.URLText+'&v=' + n, function(data) {
+                         //    $scope.$apply(function() {
+                         //    $scope.TMPalbumArt = data;
+                         //    });
                         
-                            $timeout(function(){
-                                $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
-                                    $scope.$apply(function() {
-                                     $scope.radioOptions.albumArt =  data;
-                                    // var target = angular.element(document.querySelector('#capa'));
-                                    // var target2 =  angular.element(document.querySelector('#canvas'));
-                                    
-                                    // stackBoxBlurCanvasRGB(target2, 0, 0, 500, 375, 8, 1);
-                                 });
-                                }).delay(5000).fadeOut('slow')}, 1000);
-                         });
+                         //    $timeout(function(){
+                         //        $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
+                         //            $scope.$apply(function() {
+                            
+                         //         });
+                         //        }).delay(5000).fadeOut('slow')}, 1000);
+                         // });
 
-                        //$scope.TMPalbumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
+                       // $scope.TMPalbumArt = $scope.URLCover+$scope.URLText;
+                        $scope.TMPalbumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
 
-                       
 
 
                     $scope.$apply(function() {
@@ -385,6 +427,12 @@
         }
         $scope.ExibeBanner = function (){
             $scope.ExibeFavoritar = false;
+             if (($scope.lastradio == '4')||($scope.lastradio == '5') ) {
+                  $scope.radioOptions.Background = false;
+               $scope.TMPalbumArt = 'images/banners/'+$scope.lastradio+'.jpg';
+               $scope.radioOptions.albumArt = 'images/banners/'+$scope.lastradio+'.jpg';
+                 
+            } else {
             var b = Math.floor(Math.random() * 2) + 1; 
             $scope.radioOptions.Background = false;
             $scope.TMPalbumArt = 'images/banners/'+b+'.jpg';
@@ -394,6 +442,7 @@
                                     $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
                                  });
                                 }).delay(5000).fadeOut('slow')}, 1000);
+            }
               
         }
         $scope.ToBase64 = function(url) {
@@ -531,7 +580,7 @@
             }
                     StatusBar.styleBlackOpaque();
         });
-        
+
        document.addEventListener("backbutton", $scope.BackgroundMode, true); 
 
         document.addEventListener("offline", function() {
