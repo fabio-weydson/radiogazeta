@@ -196,7 +196,7 @@
         $scope.proximaFaixa = '';
         $scope.atualFaixa = '';
         $scope.TMPalbumArt = 'images/radio/cover.png?v=3';
-        $scope.BuscaAjax = false;
+        $scope.BuscaAjax = true;
 
        
 
@@ -250,6 +250,7 @@
 
         $scope.mudaRadio = function(idRadio) {
 
+
             $scope.lastradio = idRadio;
             $scope.isPlaying = false;
            
@@ -272,6 +273,7 @@
 
         $scope.startRadio = function() {
             if ($scope.lastradio == '0') {
+
                 $scope.BuscaAjax = true;
                  $scope.ExibeFavoritar = false;
              } else {
@@ -363,8 +365,8 @@
                 var URLCurrentSong = 'http://localhost/aplicativos/current_song.php?v=' + n;
                 $scope.URLNextSong = 'http://localhost/aplicativos/next_song.php?v=' + n;
             } else {
-                var URLCurrentSong = 'http://179.188.17.9/~fmgazetacom/player/current_song.php?v=' + n;
-                $scope.URLNextSong = 'http://179.188.17.9/~fmgazetacom/player/next_song.php?v=' + n;
+                var URLCurrentSong = 'http://helloradio.com.br/radios/api/current_song.php?radio=gazeta&v=' + n;
+                $scope.URLNextSong = 'http://helloradio.com.br/radios/api/next_song.php?radio=gazeta&v=' + n;
             }
             if($scope.BuscaAjax==true) {
             $.get(URLCurrentSong, function(data) {
@@ -408,16 +410,17 @@
 
                        // $scope.TMPalbumArt = $scope.URLCover+$scope.URLText;
                         $scope.TMPalbumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
+                          $scope.radioOptions.albumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
 
 
 
-                    $scope.$apply(function() {
-                        $("span.capa img").error(function() {
-                            $scope.radioOptions.Background = false;
-                            $scope.radioOptions.albumArt = 'images/radio/cover.png?v=2';
+                    // $scope.$apply(function() {
+                    //     $("span.capa img").error(function() {
+                    //         $scope.radioOptions.Background = false;
+                    //         $scope.radioOptions.albumArt = 'images/radio/cover.png?v=2';
 
-                        });
-                    });
+                    //     });
+                    // });
 
                 }
            
@@ -431,8 +434,7 @@
                   $scope.radioOptions.Background = false;
                $scope.TMPalbumArt = 'images/banners/'+$scope.lastradio+'.jpg';
                $scope.radioOptions.albumArt = 'images/banners/'+$scope.lastradio+'.jpg';
-                 
-            } else {
+              } else {
             var b = Math.floor(Math.random() * 2) + 1; 
             $scope.radioOptions.Background = false;
             $scope.TMPalbumArt = 'images/banners/'+b+'.jpg';
@@ -442,7 +444,7 @@
                                     $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
                                  });
                                 }).delay(5000).fadeOut('slow')}, 1000);
-            }
+        }
               
         }
         $scope.ToBase64 = function(url) {
@@ -456,7 +458,7 @@
                 console.log(dataURL);
         }
         $scope.NextFaixa = function() {
-            var songTitle = '';
+         /*   var songTitle = '';
             var Artista = '';
             var Musica = '';
             var n = Math.floor(Math.random() * 999) + 1;
@@ -483,7 +485,7 @@
                 });
                 }
             })
-        }
+        } */
         }
         $scope.RefreshFaixa();
         $scope.NextFaixa();
@@ -502,7 +504,12 @@
             } else {
                var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT #redegazeta";
             }
-            var imagem = 'http://i.imgur.com/jsHElO0.jpg';
+            if(lastradio==1) {
+                var imagem = $scope.radioOptions.albumArt;
+            } else {
+                var imagem = 'https://i.imgur.com/JkufoHR.png';
+            }
+            
             //var imagem = $scope.radioOptions.albumArt;
             var link = 'http://bit.ly/1LThHb0';
             window.plugins.socialsharing.share(message, subject, imagem, link);

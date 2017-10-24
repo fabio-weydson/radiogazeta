@@ -633,7 +633,7 @@ img.bg {
   overflow: hidden;
   background-position: center top;
   background-repeat: no-repeat;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 .blurs {
   filter: url(blur.svg#blur); 
@@ -1635,7 +1635,7 @@ a.botoes[active=false] span {
     padding-top:20px !important;
 }
 div#tmp_capa {
-    display: none;
+    /* display: none; */
 }
 div#radio {
     background: #000;
