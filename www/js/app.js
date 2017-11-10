@@ -185,6 +185,7 @@
             ProximaArtista: '',
             ProximaMusica: ''
         }
+
         $scope.keywords = ["gazeta", "ch ","balança", "teaser", "thomas",
                      "andorinha", "gazeta fm", "diversos", "thomaz", "chamada",
                     "trilha", "vh", "fm", "ferreto", "andorinha"];
@@ -250,10 +251,12 @@
 
         $scope.mudaRadio = function(idRadio) {
 
-
+             $scope.TMPalbumArt = 'images/radio/cover.png';
+               $scope.radioOptions.albumArt = 'images/radio/cover.png';
             $scope.lastradio = idRadio;
             $scope.isPlaying = false;
-           
+           $scope.radioOptions.Artista = "";
+                $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
             $('#jquery_jplayer_1').jPlayer('stop');
 
             var stream = {
@@ -262,20 +265,22 @@
             };
             window.localStorage.setItem('lastradio', $scope.radios_arr[idRadio].id);
             window.localStorage.setItem('autoplay', true);
-            $scope.logo = $scope.radios_arr[idRadio].logo;
-
-            $scope.radioOptions.Titulo = stream.title;
+           
 
             $('#jquery_jplayer_1').jPlayer("setMedia", stream);
+       
+            $scope.logo = $scope.radios_arr[idRadio].logo;
+            $scope.radioOptions.Titulo = $scope.radios_arr[idRadio].title;       
             $scope.startRadio();
+           
             return false;
         }
 
         $scope.startRadio = function() {
+            console.log($scope.radioOptions.Titulo)
             if ($scope.lastradio == '0') {
-
                 $scope.BuscaAjax = true;
-                 $scope.ExibeFavoritar = false;
+                $scope.ExibeFavoritar = false;
              } else {
                 $scope.BuscaAjax = false;
                 $scope.radioOptions.Background = false;
@@ -289,8 +294,9 @@
             if ($scope.isPlaying) {
                 $scope.isPlaying = false;
                 $scope.buttonIcon = '<span class="ion-ios-play"></span>';
-
+                
                 $('#jquery_jplayer_1').jPlayer('stop');
+                
             } else {
                 $('#jquery_jplayer_1').jPlayer('play',0);
                 $scope.buttonIcon = '<img src="images/load.gif">';
@@ -299,7 +305,7 @@
                     $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
 
                     $scope.isPlaying = true;
-                }, 5000);
+                }, 3000);
             }
             return false;
         }
@@ -362,7 +368,8 @@
             var largura_capa = $('.capa').width();
 
             if (document.location.hostname == "localhost") {
-                var URLCurrentSong = 'http://localhost/aplicativos/current_song.php?v=' + n;
+                //var URLCurrentSong = 'http://localhost/aplicativos/current_song.php?v=' + n;
+                var URLCurrentSong = 'http://helloradio.com.br/radios/api/current_song.php?radio=gazeta&v=' + n;
                 $scope.URLNextSong = 'http://localhost/aplicativos/next_song.php?v=' + n;
             } else {
                 var URLCurrentSong = 'http://helloradio.com.br/radios/api/current_song.php?radio=gazeta&v=' + n;
