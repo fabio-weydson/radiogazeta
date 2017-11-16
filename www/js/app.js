@@ -133,7 +133,7 @@
             title: 'Gazeta Cuiabá 99.9',
             menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc6.dnip.com.br:13250',
+            ip: '143.208.11.104:8064',
             logo: 'logo_xx.png'
         }, {
             id: '1',
@@ -294,9 +294,9 @@
             if ($scope.isPlaying) {
                 $scope.isPlaying = false;
                 $scope.buttonIcon = '<span class="ion-ios-play"></span>';
-                
+
                 $('#jquery_jplayer_1').jPlayer('stop');
-                
+
             } else {
                 $('#jquery_jplayer_1').jPlayer('play',0);
                 $scope.buttonIcon = '<img src="images/load.gif">';
