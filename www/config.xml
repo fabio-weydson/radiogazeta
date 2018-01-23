@@ -148,7 +148,7 @@
     </platform>
 
     <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>140</string>
+    <string>141</string>
     </gap:config-file>
 
     <gap:config-file platform="android" parent="/manifest/application">
