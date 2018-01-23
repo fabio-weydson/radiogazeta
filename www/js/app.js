@@ -41,6 +41,8 @@
             // offlineMessage.hide();
         });
 
+        document.addEventListener("deviceReady", function(e) { navigator.splashscreen.hide(); });
+
 
     });
 
