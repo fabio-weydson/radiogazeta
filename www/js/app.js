@@ -281,7 +281,8 @@
         $scope.startRadio = function() {
             console.log($scope.radioOptions.Titulo)
             if ($scope.lastradio == '0') {
-                $scope.BuscaAjax = true;
+                 $scope.ExibeBanner();
+                $scope.BuscaAjax = false;
                 $scope.ExibeFavoritar = false;
              } else {
                 $scope.BuscaAjax = false;
@@ -290,6 +291,7 @@
                 $scope.radioOptions.Artista = "";
                 $scope.radioOptions.Musica = $scope.radioOptions.Titulo;
 
+               
                 $scope.ExibeBanner();
                 $scope.ExibeFavoritar = false;
             }
