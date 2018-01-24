@@ -5,10 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.redegazeta.app"
-ios-CFBundleVersion="144" 
-ios-CFBundleShortVersionString="1.7" 
         version   = "1.7"
-        versionCode ="1.7"
         >
     <name>Rede Gazeta MT</name>
 
@@ -19,6 +16,10 @@ ios-CFBundleShortVersionString="1.7"
     <author href="http://fm.gazetadigital.com.br" email="fabioweydson@gmail.com">
         Grupo Gazeta
     </author>
+
+<gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
+<string>145</string> 
+</gap:config-file> 
 
     <!--
         If you do not want any permissions to be added to your app, add the
@@ -132,10 +133,6 @@ ios-CFBundleShortVersionString="1.7"
         <splash density="port-xxxhdpi" src="res/screen/android/splash-port-xxxhdpi.png"/>
     <!--  Landscape  -->
     </platform>
-
-<gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-<string>1.7</string> 
-</gap:config-file> 
 
     <gap:config-file platform="android" parent="/manifest/application">
     <activity android:launchMode="singleInstance" />
