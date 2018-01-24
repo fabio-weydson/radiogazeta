@@ -5,8 +5,8 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.redegazeta.app"
-ios-CFBundleVersion="1.6.1" 
-        version   = "1.6">
+ios-CFBundleVersion="140" 
+        version   = "1.6.1">
     <name>Rede Gazeta MT</name>
 
     <description>
