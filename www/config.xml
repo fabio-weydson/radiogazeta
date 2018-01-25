@@ -5,8 +5,8 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.redegazeta.app"
-        versionCode = "155"
-        version   = "1.7"
+        versionCode = "1150"
+        version   = "150"
         >
     <name>Rede Gazeta MT</name>
 
@@ -17,6 +17,10 @@
     <author href="http://fm.gazetadigital.com.br" email="fabioweydson@gmail.com">
         Grupo Gazeta
     </author>
+
+<gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
+<string>1.7</string> 
+</gap:config-file> 
 
     <!--
         If you do not want any permissions to be added to your app, add the
@@ -55,15 +59,13 @@
     -->
 
 <!-- <preference name="android-targetSdkVersion" value="22" />
- -->    <preference name="phonegap-version" value="cli-6.5.0"  />
+ -->    <preference name="phonegap-version" value="cli-7.1.0"  />
 <!--     <preference name="phonegap-version"       value="3.7.0" /> 
  -->
   <!-- Plugins -->
 
     <!-- Core plugins -->
- <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>135</string>
-    </gap:config-file>
+
     <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
     <gap:plugin name="cordova-plugin-device" source="npm"/> 
     <gap:plugin name="cordova-plugin-file" source="npm" /> 
