@@ -135,7 +135,7 @@
             title: 'Gazeta Cuiabá 99.9',
             menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:13250',
+            ip: 'sc6.dnip.com.br:13250',
             logo: 'logo_xx.png'
         }, {
             id: '1',
@@ -164,7 +164,7 @@
             title: 'Vila Real',
             menu: 'Vila Real',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc5.dnip.com.br:9374',
+            ip: 'paineldj1.com.br:14175/stream',
             logo: '4.png'
         }
         , {
@@ -199,7 +199,7 @@
         $scope.proximaFaixa = '';
         $scope.atualFaixa = '';
         $scope.TMPalbumArt = 'images/radio/cover.png?v=3';
-        $scope.BuscaAjax = true;
+        $scope.BuscaAjax = false;
 
        
 
@@ -260,11 +260,17 @@
            $scope.radioOptions.Artista = "";
                 $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
             $('#jquery_jplayer_1').jPlayer('stop');
-
-            var stream = {
-                title: $scope.radios_arr[idRadio].title,
-                mp3: 'http://' + $scope.radios_arr[idRadio].ip + '/;stream.mp3'
-            };
+              if ($scope.lastradio == '4') {
+                var stream = {
+                    title: $scope.radios_arr[idRadio].title,
+                    mp3: 'http://' + $scope.radios_arr[idRadio].ip
+                };
+              } else {
+                var stream = {
+                    title: $scope.radios_arr[idRadio].title,
+                    mp3: 'http://' + $scope.radios_arr[idRadio].ip + '/;stream.mp3'
+                };
+            }
             window.localStorage.setItem('lastradio', $scope.radios_arr[idRadio].id);
             window.localStorage.setItem('autoplay', true);
            
@@ -282,7 +288,7 @@
             console.log($scope.radioOptions.Titulo)
             if ($scope.lastradio == '0') {
                  $scope.ExibeBanner();
-                $scope.BuscaAjax = false;
+                $scope.BuscaAjax = true;
                 $scope.ExibeFavoritar = false;
              } else {
                 $scope.BuscaAjax = false;
@@ -440,13 +446,16 @@
             }
         }
         $scope.ExibeBanner = function (){
+
             $scope.ExibeFavoritar = false;
-             if (($scope.lastradio == '4')||($scope.lastradio == '5') ) {
+             if ($scope.lastradio != 0) {
+                $scope.BuscaAjax = false;
                   $scope.radioOptions.Background = false;
                $scope.TMPalbumArt = 'images/banners/'+$scope.lastradio+'.jpg';
                $scope.radioOptions.albumArt = 'images/banners/'+$scope.lastradio+'.jpg';
               } else {
             var b = Math.floor(Math.random() * 2) + 1; 
+             $scope.BuscaAjax = true;
             $scope.radioOptions.Background = false;
             $scope.TMPalbumArt = 'images/banners/'+b+'.jpg';
             $timeout(function(){
@@ -515,7 +524,7 @@
             } else {
                var message = 'Estou ouvindo ' + $scope.radioOptions.Titulo + " Via App ofical da Rede Gazeta MT #redegazeta";
             }
-            if(lastradio==1) {
+            if($scope.lastradio==0) {
                 var imagem = $scope.radioOptions.albumArt;
             } else {
                 var imagem = 'https://i.imgur.com/JkufoHR.png';
