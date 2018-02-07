@@ -135,21 +135,21 @@
             title: 'Gazeta Cuiabá 99.9',
             menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'wz4.dnip.com.br:13155',
+            ip: 'sc4.dnip.com.br:11260',
             logo: 'logo_xx.png'
         }, {
             id: '1',
             title: 'Gazeta Alta Floresta 95.5',
             menu: 'Alta Floresta',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:12575',
+            ip: 'sc4.dnip.com.br:11260',
              logo: 'logo_xx.png'
         }, {
             id: '2',
             title: 'Gazeta Barra do Garças 96.1',
             menu: 'Barra do Garças',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:15165',
+            ip: 'sc4.dnip.com.br:11260',
             logo: 'logo_xx.png'
         }, {
             id: '3',
@@ -172,7 +172,7 @@
             title: 'Cultura FM',
             menu: 'Cultura FM',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:11260',
+            ip: 'wz4.dnip.com.br:13155',
             logo: '5.png'
         }];
 
