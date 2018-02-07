@@ -135,7 +135,7 @@
             title: 'Gazeta Cuiabá 99.9',
             menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc6.dnip.com.br:13250',
+            ip: 'wz4.dnip.com.br:13155',
             logo: 'logo_xx.png'
         }, {
             id: '1',
