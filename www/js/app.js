@@ -172,7 +172,7 @@
             title: 'Cultura FM',
             menu: 'Cultura FM',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'paineldj1.com.br:14175/stream',
+            ip: 'sc4.dnip.com.br:11260',
             logo: '5.png'
         }];
 
@@ -260,7 +260,7 @@
            $scope.radioOptions.Artista = "";
                 $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
             $('#jquery_jplayer_1').jPlayer('stop');
-              if ($scope.lastradio >= '4') {
+              if ($scope.lastradio == '4') {
                 var stream = {
                     title: $scope.radios_arr[idRadio].title,
                     mp3: 'http://' + $scope.radios_arr[idRadio].ip
