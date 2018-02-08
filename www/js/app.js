@@ -8,7 +8,7 @@
 (function() {
     'use strict';
 
-    var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio',  'angular-jwplayer']);
+    var app = angular.module('app', ['onsen', 'angular-images-loaded', 'ngAudio',  'angular-jwplayer', 'ui.router']);
 
     // Filter to convert HTML content to string by removing all HTML tags
     app.filter('htmlToPlaintext', function() {
@@ -16,10 +16,21 @@
             return String(text).replace(/<[^>]+>/gm, '');
         }
     });
+    app.config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider
 
+      .state('home', {
+        url: '/',
+        templateUrl: 'index.html',
+        controller: 'radioController'
+      })
+
+      $urlRouterProvider.otherwise("/");
+
+    })
     app.controller('networkController', function($scope) {
 
-        $scope.logo = 'images/radio/logo_xx.png';
+        $scope.logo = 'logo_xx.png';
 
 
         // Check if is Offline
@@ -118,7 +129,7 @@
 
     // Radio Controller
 
-    app.controller('radioController', function($scope, $sce, $interval, $timeout) {
+    app.controller('radioController', function($scope, $sce, $interval, $timeout, $state) {
 
 
 
@@ -252,6 +263,7 @@
         });
 
         $scope.mudaRadio = function(idRadio) {
+            $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
 
              $scope.TMPalbumArt = 'images/radio/cover.png';
                $scope.radioOptions.albumArt = 'images/radio/cover.png';
@@ -584,9 +596,11 @@
         }
 
         ons.ready(function() {
-
+//            $scope.$on('$stateChangeSuccess', function () {
+//  console.log('sdsd23s')
+// });
             if(ons.platform.isIOS()){
-                $('.navigation-bar').css({'padding-top':"20px"});
+                // $('.navigation-bar').css({'padding-top':"20px"});
             }
             cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, ticker: 'Entrando em segundo plano',  text:'Clique para abrir o aplicativo.'});
             cordova.plugins.backgroundMode.enable();
