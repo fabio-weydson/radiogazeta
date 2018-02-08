@@ -135,7 +135,7 @@
             title: 'Gazeta Cuiabá 99.9',
             menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'wz4.dnip.com.br:13155',
+            ip: '143.208.11.104:8280',
             logo: 'logo_xx.png'
         }, {
             id: '1',
@@ -149,14 +149,14 @@
             title: 'Gazeta Barra do Garças 96.1',
             menu: 'Barra do Garças',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:15165',
+            ip: '143.208.11.104:8244',
             logo: 'logo_xx.png'
         }, {
             id: '3',
             title: 'Gazeta Poxoréu 90.9',
             menu: 'Poxoréu',
             icon: 'ion-ios7-calendar-outline',
-            ip: 'sc4.dnip.com.br:11540',
+            ip: '143.208.11.104:8258',
             logo: 'logo_xx.png'
         }
         , {
