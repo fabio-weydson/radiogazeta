@@ -482,7 +482,7 @@
         ons.ready(function() {
 
             if(ons.platform.isIOS()){
-                // $('.navigation-bar').css({'padding-top':"20px"});
+                 $('.navigation-bar').css({'padding-top':"20px"});
             }
             cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, ticker: 'Entrando em segundo plano',  text:'Clique para abrir o aplicativo.'});
             cordova.plugins.backgroundMode.enable();
