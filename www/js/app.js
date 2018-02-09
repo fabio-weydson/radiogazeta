@@ -145,6 +145,8 @@
             ProximaMusica: ''
         }
 
+
+
         $scope.keywords = ["gazeta", "ch ","balança", "teaser", "thomas",
                      "andorinha", "gazeta fm", "diversos", "thomaz", "chamada",
                     "trilha", "vh", "fm", "ferreto", "andorinha"];
@@ -211,7 +213,6 @@
 
         $scope.mudaRadio = function(idRadio) {
             // $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
-            console.log(idRadio,$scope.lastradio)
             if(idRadio!=$scope.lastradio) {
                     $window.location.reload();
             }
@@ -248,7 +249,6 @@
         }
 
         $scope.startRadio = function() {
-            console.log($scope.radioOptions.Titulo)
             if ($scope.lastradio == '0') {
                  $scope.ExibeBanner();
                 $scope.BuscaAjax = true;
