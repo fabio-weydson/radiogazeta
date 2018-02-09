@@ -24,6 +24,7 @@
         templateUrl: 'index.html',
         controller: 'radioController'
       })
+   
 
       $urlRouterProvider.otherwise("/");
 
@@ -35,21 +36,14 @@
 
         // Check if is Offline
         document.addEventListener("offline", function() {
-
             offlineMessage.show();
-
-            /*
-             * With this line of code you can hide the modal in 8 seconds but the user will be able to use your app
-             * If you want to block the use of the app till the user gets internet again, please delete this line.
-             */
-
             setTimeout('offlineMessage.hide()', 8000);
 
         }, false);
-
         document.addEventListener("online", function() {
             // If you remove the "setTimeout('offlineMessage.hide()', 8000);" you must remove the comment for the line above
             // offlineMessage.hide();
+               $window.location.reload();
         });
 
         document.addEventListener("deviceReady", function(e) { navigator.splashscreen.hide(); });
@@ -57,50 +51,6 @@
 
     });
 
-    // This functions will help us save the JSON in the localStorage to read the website content offline
-
-    Storage.prototype.setObject = function(key, value) {
-        this.setItem(key, JSON.stringify(value));
-    }
-
-    Storage.prototype.getObject = function(key) {
-        var value = this.getItem(key);
-        return value && JSON.parse(value);
-    }
-
-    // This directive will allow us to cache all the images that have the img-cache attribute in the <img> tag
-    app.directive('imgCache', ['$document', function($document) {
-        return {
-            link: function(scope, ele, attrs) {
-                var target = $(ele);
-
-                scope.$on('ImgCacheReady', function() {
-
-                    ImgCache.isCached(attrs.src, function(path, success) {
-                        if (success) {
-                            ImgCache.useCachedFile(target);
-                        } else {
-                            ImgCache.cacheFile(attrs.src, function() {
-                                ImgCache.useCachedFile(target);
-                            });
-                        }
-                    });
-                }, false);
-
-            }
-        };
-    }]);
-    app.directive('fadeIn', function($timeout) {
-        return {
-            restrict: 'A',
-            link: function($scope, $element, attrs) {
-                $element.addClass("ng-hide-remove");
-                $element.on('load', function() {
-                    $element.addClass("ng-hide-add");
-                });
-            }
-        }
-    })
     app.directive("scrollableTab",function($compile) {
     function link($scope, element, attrs) {
         debugger;
@@ -129,11 +79,8 @@
 
     // Radio Controller
 
-    app.controller('radioController', function($scope, $sce, $interval, $timeout, $state) {
+    app.controller('radioController', function($scope, $sce, $interval, $timeout, $state, $window) {
 
-
-
- $('.bgbox img').width
         $scope.isPlaying = false;
         $scope.autoplay = false;
         $scope.lastradio = window.localStorage.getItem('lastradio');
@@ -188,7 +135,6 @@
         }];
 
         $scope.radioOptions = {
-            Background: true,
             Titulo: '',
             albumArt: 'images/radio/cover.png?v=3',
             Artista: 'Carregando...',
@@ -242,6 +188,7 @@
             },
             play: function() {
                 $scope.Status = 'playing';
+
             },
             pause: function() {
                 $scope.Status = 'paused';
@@ -263,14 +210,18 @@
         });
 
         $scope.mudaRadio = function(idRadio) {
-            $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
+            // $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
+            console.log(idRadio,$scope.lastradio)
+            if(idRadio!=$scope.lastradio) {
+                    $window.location.reload();
+            }
 
-             $scope.TMPalbumArt = 'images/radio/cover.png';
-               $scope.radioOptions.albumArt = 'images/radio/cover.png';
+            $scope.TMPalbumArt = 'images/radio/cover.png';
+            $scope.radioOptions.albumArt = 'images/radio/cover.png';
             $scope.lastradio = idRadio;
             $scope.isPlaying = false;
-           $scope.radioOptions.Artista = "";
-                $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
+            $scope.radioOptions.Artista = "";
+            $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
             $('#jquery_jplayer_1').jPlayer('stop');
               if ($scope.lastradio == '4') {
                 var stream = {
@@ -304,7 +255,6 @@
                 $scope.ExibeFavoritar = false;
              } else {
                 $scope.BuscaAjax = false;
-                $scope.radioOptions.Background = false;
                 $scope.radioOptions.ProximaMusica = false;
                 $scope.radioOptions.Artista = "";
                 $scope.radioOptions.Musica = $scope.radioOptions.Titulo;
@@ -422,39 +372,14 @@
                 if (result != null) {
                     $scope.ExibeBanner();
                 } else {
-                        $scope.radioOptions.Background = false;
                         $scope.URLText = $scope.Base64($scope.limpa_str($scope.radioOptions.Artista));
-                         //  $.get($scope.URLCover+$scope.URLText+'&v=' + n, function(data) {
-                         //    $scope.$apply(function() {
-                         //    $scope.TMPalbumArt = data;
-                         //    });
-                        
-                         //    $timeout(function(){
-                         //        $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
-                         //            $scope.$apply(function() {
-                            
-                         //         });
-                         //        }).delay(5000).fadeOut('slow')}, 1000);
-                         // });
-
-                       // $scope.TMPalbumArt = $scope.URLCover+$scope.URLText;
                         $scope.TMPalbumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
-                          $scope.radioOptions.albumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
+                        $scope.radioOptions.albumArt = $sce.trustAsResourceUrl($scope.URLCover+$scope.URLText);
 
-
-
-                    // $scope.$apply(function() {
-                    //     $("span.capa img").error(function() {
-                    //         $scope.radioOptions.Background = false;
-                    //         $scope.radioOptions.albumArt = 'images/radio/cover.png?v=2';
-
-                    //     });
-                    // });
 
                 }
            
             })
-            $scope.NextFaixa();
             }
         }
         $scope.ExibeBanner = function (){
@@ -462,73 +387,32 @@
             $scope.ExibeFavoritar = false;
              if ($scope.lastradio != 0) {
                 $scope.BuscaAjax = false;
-                  $scope.radioOptions.Background = false;
                $scope.TMPalbumArt = 'images/banners/'+$scope.lastradio+'.jpg';
                $scope.radioOptions.albumArt = 'images/banners/'+$scope.lastradio+'.jpg';
               } else {
             var b = Math.floor(Math.random() * 2) + 1; 
              $scope.BuscaAjax = true;
-            $scope.radioOptions.Background = false;
             $scope.TMPalbumArt = 'images/banners/'+b+'.jpg';
-            $timeout(function(){
-                                $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
-                                    $scope.$apply(function() {
-                                    $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
-                                 });
-                                }).delay(5000).fadeOut('slow')}, 1000);
+            // $timeout(function(){
+            //                     $('#tmp_capa,.capa .reserva').hide().fadeIn('slow', function(){
+            //                         $scope.$apply(function() {
+            //                         $scope.radioOptions.albumArt = 'images/banners/'+b+'.jpg';
+            //                      });
+            //                     }).delay(5000).fadeOut('slow')}, 1000);
         }
               
         }
-        $scope.ToBase64 = function(url) {
- 
-                var canvas = document.createElement('CANVAS');
-                var ctx = canvas.getContext('2d');
-                canvas.height = this.height;
-                canvas.width = this.width;
-                ctx.drawImage(this,0,0);
-                var dataURL = canvas.toDataURL('image/png');
-                console.log(dataURL);
-        }
-        $scope.NextFaixa = function() {
-         /*   var songTitle = '';
-            var Artista = '';
-            var Musica = '';
-            var n = Math.floor(Math.random() * 999) + 1;
-           if($scope.BuscaAjax==true) {
-            $.get($scope.URLNextSong, function(data) {
-              
-            }).done(function(data) {
-                var faixa = data.split(" - ");
-                if (faixa[1] != undefined) {
-                    Artista = faixa[1];
-                }
-                if (faixa[0] != undefined) {
-                    Musica = faixa[0];
-                }
 
-                songTitle = Artista + ' - ' + Musica;
-                var result = $scope.ExisteTexto(songTitle.toLowerCase(), 
-                $scope.keywords);
-
-                if (result == null) {
-                $scope.$apply(function() {
-                    $scope.radioOptions.ProximaArtista = Artista;
-                    $scope.radioOptions.ProximaMusica = Musica;
-                });
-                }
-            })
-        } */
-        }
+        
         $scope.RefreshFaixa();
-        $scope.NextFaixa();
 
         $timeout(function(){
             $scope.RefreshFaixa();
-            $scope.NextFaixa();
             $interval(function() {
                 $scope.RefreshFaixa();
             }, 40000)
         }, 5000);
+
         $scope.shareMusica = function() {
             var subject = 'Radio ' + $scope.radioOptions.Titulo;
             if($scope.radioOptions.songTitle) {
@@ -596,9 +480,7 @@
         }
 
         ons.ready(function() {
-//            $scope.$on('$stateChangeSuccess', function () {
-//  console.log('sdsd23s')
-// });
+
             if(ons.platform.isIOS()){
                 // $('.navigation-bar').css({'padding-top':"20px"});
             }

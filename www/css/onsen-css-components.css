@@ -410,7 +410,6 @@ h6 {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .navigation-bar {
     border-bottom: none;
-  
     /* background: #F4F4F4; */
 }
 }
@@ -472,9 +471,11 @@ h6 {
   text-align: left;
   font-family: "Roboto";
   padding: 0;
-  overflow: visible;
-  width: auto;
+  width: 53%;
   float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;

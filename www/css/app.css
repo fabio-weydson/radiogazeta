@@ -11,7 +11,7 @@ ons-tabbar {
     position: relative !important;
     width: 300px;
     margin:0 auto;
-    margin-top: 60%;
+    margin-top: 50%;
 }
 
 ons-tabbar .tab-bar__item {
