@@ -88,13 +88,19 @@
           </ons-col>
           <ons-col width="32%"></ons-col>
         </ons-row>
-          <ons-tabbar>
+          <!-- <ons-tabbar>
     <ons-tab ng-click="mudaRadio(item.id);" ng-repeat="(key,item) in radios_arr" ng-attr-active="{{ lastradio == item.id }}">
       <img ng-src="images/radio/{{item.logo}}"><br>
       <span class="tab-label">{{item.menu}}</span>
-    </ons-tab>
+    </ons-tab> 
    
-  </ons-tabbar>
+  </ons-tabbar>-->
+  <div class="select-radios">
+    <div class="radio-item" ng-click="mudaRadio(item.id);" ng-repeat="(key,item) in radios_arr" ng-attr-active="{{ lastradio == item.id }}">
+      <img ng-src="images/radio/{{item.logo}}">
+      <span class="title">{{item.menu}}</span>
+    </div>
+  </div>
       </div>
 
 

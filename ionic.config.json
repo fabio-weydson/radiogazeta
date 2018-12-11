@@ -1,0 +1,7 @@
+{
+  "name": "radiogazeta",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

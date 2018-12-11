@@ -116,8 +116,14 @@
             icon: 'ion-ios7-calendar-outline',
             ip: '143.208.11.104:8258',
             logo: 'logo_xx.png'
-        }
-        , {
+        },{
+            id: '6',
+            title: 'Tangara da Serra',
+            menu: 'Tangara da Serra',
+            icon: 'ion-ios7-calendar-outline',
+            ip: 'paineldj4.com.br:9038/stream',
+            logo: 'logo_xx.png'
+        },{
             id: '4',
             title: 'Vila Real',
             menu: 'Vila Real',
