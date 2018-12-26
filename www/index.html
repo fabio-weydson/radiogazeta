@@ -31,7 +31,7 @@
   <script src="js/jquery.jplayer.min.js"></script>
 </head>
 
-<body ng-controller="networkController" has-bouncing="false" class="has-header has-subheader">    
+<body ng-controller="networkController" style="background:url(images/bg.png)" has-bouncing="false" class="has-header has-subheader">    
   <div id="radio" ng-controller="radioController" >
     <ons-toolbar>
       <div class="left">
@@ -42,9 +42,9 @@
         {{radioOptions.Titulo}}
       </div>
       <div class="right">
-        <a href="#" class="botoes" ng-click="shareMusica()"><span class="ion-android-share-alt"></span></a>
-        <a href="#" class="botoes" ng-click="AbrePedidos()"><span class="ion-android-mail"></span></a>
-        <a href="#" class="botoes" ng-click="CloseApp()"><span class="ion-close-circled"></span></a>
+        <a href="javascript:void()" class="botoes" ng-click="shareMusica()"><span class="ion-android-share-alt"></span></a>
+        <a href="javascript:void()" class="botoes" ng-click="AbrePedidos()"><span class="ion-android-mail"></span></a>
+        <a href="javascript:void()" class="botoes" ng-click="CloseApp()"><span class="ion-close-circled"></span></a>
       </div>
     </ons-toolbar>
 
@@ -165,7 +165,7 @@
         <input name="musica" type="text" class="text-input" placeholder="Música/Cantor" style="display: block; width: 100%">
       </section>
       <section style="padding: 8px 0">
-        <textarea name="comentario" class="textarea" ng-model="text2" placeholder="Seu comentáio/mensagem" style="width: 100%; height: 100px;"></textarea>
+        <textarea name="comentario" class="textarea" ng-model="text2" placeholder="Seu comentário/mensagem" style="width: 100%; height: 100px;"></textarea>
       </section>
 
       <section style="padding: 8px 0" id="botoes">

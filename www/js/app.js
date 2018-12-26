@@ -117,14 +117,14 @@
             ip: 'sc4.dnip.com.br:11540',
             logo: 'logo_xx.png'
         },{
-            id: '6',
+            id: '4',
             title: 'Tangara da Serra',
             menu: 'Tangara da Serra',
             icon: 'ion-ios7-calendar-outline',
             ip: 'paineldj4.com.br:9038/stream',
             logo: 'logo_xx.png'
         },{
-            id: '4',
+            id: '5',
             title: 'Vila Real',
             menu: 'Vila Real',
             icon: 'ion-ios7-calendar-outline',
@@ -132,7 +132,7 @@
             logo: '4.png'
         }
         , {
-            id: '5',
+            id: '6',
             title: 'Cultura FM',
             menu: 'Cultura FM',
             icon: 'ion-ios7-calendar-outline',

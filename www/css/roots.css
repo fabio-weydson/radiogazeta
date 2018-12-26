@@ -605,6 +605,7 @@ background-repeat: no-repeat;
 opacity: 0.5;
 }
 .blurs {
+  display: none;
 filter: url(blur.svg#blur); 
 -webkit-filter: blur(6px); 
 filter: blur(6px); 
@@ -1501,7 +1502,7 @@ ons-col#display {
   /* border-radius: 6px; */
   /* background: #FFF; */
   position: relative;
-  min-height: 200px;
+  min-height: 170px;
   overflow: hidden;
 }
 ons-row#controls {
@@ -1607,7 +1608,7 @@ div#tmp_capa {
   /* display: none; */
 }
 div#radio {
-  background: #000;
+  background: transparent;
   height: 100%;
   width: 100%;
   background-size: auto 100%;
