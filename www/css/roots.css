@@ -1614,16 +1614,7 @@ div#radio {
   background-size: auto 100%;
 }
 
-.select-radios  {
-color: #FFF;
-background: #0e0e0e66;
-border: none;
-padding: 0 13px;
-border-radius: 6px;
-margin: 0 auto;
-width: 80%;
-font-size: 17px;
-}
+.select-radios  {color: #FFF;background: url(../images/bg-transp.png);border: none;padding: 0 13px;border-radius: 6px;margin: 0 auto;width: 80%;font-size: 17px;}
 
 .select-radios .radio-item {display: block;font-size: 17px;font-weight: 400;height: 45px;font-family: "Roboto";border-bottom: 1px solid #3c3b3b;line-height: 45px;}
 
