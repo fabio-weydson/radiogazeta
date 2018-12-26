@@ -90,31 +90,31 @@
         }
         $scope.radios_arr = [{
             id: '0',
-            title: 'Gazeta Cuiabá 99.9',
+            title: 'Cuiabá 99.9',
             menu: 'Cuiabá',
             icon: 'ion-ios7-calendar-outline',
-            ip: '143.208.11.104:8280',
+            ip: 'sc6.dnip.com.br:13250',
             logo: 'logo_xx.png'
         }, {
             id: '1',
-            title: 'Gazeta Alta Floresta 95.5',
+            title: 'Alta Floresta 95.5',
             menu: 'Alta Floresta',
             icon: 'ion-ios7-calendar-outline',
-            ip: '143.208.11.104:8278',
+            ip: 'sc4.dnip.com.br:12575',
              logo: 'logo_xx.png'
         }, {
             id: '2',
-            title: 'Gazeta Barra do Garças 96.1',
+            title: 'Barra do Garças 96.1',
             menu: 'Barra do Garças',
             icon: 'ion-ios7-calendar-outline',
-            ip: '143.208.11.104:8244',
+            ip: 'sc4.dnip.com.br:15165',
             logo: 'logo_xx.png'
         }, {
             id: '3',
-            title: 'Gazeta Poxoréu 90.9',
+            title: 'Poxoréu 90.9',
             menu: 'Poxoréu',
             icon: 'ion-ios7-calendar-outline',
-            ip: '143.208.11.104:8258',
+            ip: 'sc4.dnip.com.br:11540',
             logo: 'logo_xx.png'
         },{
             id: '6',

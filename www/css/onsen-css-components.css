@@ -464,14 +464,14 @@ h6 {
 }
 .navigation-bar__title {
   line-height: 44px;
-  font-size: 1.0em;
+  font-size: 0.9em;
   font-weight: 500;
   color: #ECE9E9;
   margin: 0;
   text-align: left;
   font-family: "Roboto";
   padding: 0;
-  width: 53%;
+  width: auto;
   float: left;
   white-space: nowrap;
   overflow: hidden;
