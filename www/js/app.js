@@ -118,7 +118,7 @@
             logo: 'logo_xx.png'
         },{
             id: '4',
-            title: 'Tangara da Serra',
+            title: 'Tangará da Serra',
             menu: 'Tangara da Serra',
             icon: 'ion-ios7-calendar-outline',
             ip: 'paineldj4.com.br:9038/stream',
@@ -230,7 +230,7 @@
             $scope.radioOptions.Artista = "";
             $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
             $('#jquery_jplayer_1').jPlayer('stop');
-              if ($scope.lastradio == '4') {
+              if (($scope.lastradio == '4')||($scope.lastradio == '5')) {
                 var stream = {
                     title: $scope.radios_arr[idRadio].title,
                     mp3: 'http://' + $scope.radios_arr[idRadio].ip
