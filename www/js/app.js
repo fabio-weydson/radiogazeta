@@ -111,7 +111,7 @@
             logo: 'logo_xx.png'
         }, {
             id: '3',
-            title: 'Poxoréu 90.9',
+            title: 'Poxoréu 91.5',
             menu: 'Poxoréu',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:11540',
@@ -493,6 +493,7 @@
             cordova.plugins.backgroundMode.setDefaults({  title:  $scope.radioOptions.Titulo, ticker: 'Entrando em segundo plano',  text:'Clique para abrir o aplicativo.'});
             cordova.plugins.backgroundMode.enable();
             cordova.plugins.backgroundMode.onactivate = function () {
+                cordova.plugins.backgroundMode.disableWebViewOptimizations();
                 setTimeout(function () {
                     // Modify the currently displayed notification
                     if($scope.radioOptions.songTitle) {
