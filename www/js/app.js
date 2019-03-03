@@ -178,8 +178,8 @@
 
         $scope.radioOptions.Titulo = $scope.radios_arr[$scope.lastradio].title;
         $scope.buttonIcon = '<span class="ion-ios-pause"></span>';
-
-        $('#jquery_jplayer_1').jPlayer({
+        var Player = $('#jquery_jplayer_1');
+        Player.jPlayer({
             swfPath: "http://jplayer.org/latest/dist/jplayer",
             supplied: "mp3",
             preload: "none",
@@ -220,8 +220,11 @@
         $scope.mudaRadio = function(idRadio) {
             // $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
             if(idRadio!=$scope.lastradio) {
-                    $window.location.reload();
+                    //$window.location.reload();
+                    Player.jPlayer("destroy");
+
             }
+            //Player.jPlayer("destroy");
 
             $scope.TMPalbumArt = 'images/radio/cover.png';
             $scope.radioOptions.albumArt = 'images/radio/cover.png';
@@ -229,7 +232,7 @@
             $scope.isPlaying = false;
             $scope.radioOptions.Artista = "";
             $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
-            $('#jquery_jplayer_1').jPlayer('stop');
+            Player.jPlayer('stop');
               if (($scope.lastradio == '4')||($scope.lastradio == '5')) {
                 var stream = {
                     title: $scope.radios_arr[idRadio].title,
@@ -244,9 +247,12 @@
             window.localStorage.setItem('lastradio', $scope.radios_arr[idRadio].id);
             window.localStorage.setItem('autoplay', true);
            
-
-            $('#jquery_jplayer_1').jPlayer("setMedia", stream);
-       
+            Player.jPlayer();
+            Player.jPlayer("setMedia", stream);
+            setTimeout(function () {      
+               Player.jPlayer('play',0);
+            }, 150);
+             
             $scope.logo = $scope.radios_arr[idRadio].logo;
             $scope.radioOptions.Titulo = $scope.radios_arr[idRadio].title;       
             $scope.startRadio();
@@ -273,10 +279,10 @@
                 $scope.isPlaying = false;
                 $scope.buttonIcon = '<span class="ion-ios-play"></span>';
 
-                $('#jquery_jplayer_1').jPlayer('stop');
+                Player.jPlayer('stop');
 
             } else {
-                $('#jquery_jplayer_1').jPlayer('play',0);
+                Player.jPlayer('play',0);
                 $scope.buttonIcon = '<img src="images/load.gif">';
 
                 $timeout(function() {
@@ -465,7 +471,7 @@
             });
         }  
         $scope.CloseApp = function(){
-            $('#jquery_jplayer_1').jPlayer('stop');
+            Player.jPlayer('stop');
              if (navigator.app) {
                         navigator.app.exitApp();
                     } else if (navigator.device) {
@@ -516,7 +522,7 @@
         document.addEventListener("offline", function() {
 
             $scope.isPlaying = false;
-            $('#jquery_jplayer_1').jPlayer('stop');
+            Player.jPlayer('stop');
             $scope.buttonIcon = '<span class="ion-ios-play"></span>';
             $scope.radio = null;
             modal.show();

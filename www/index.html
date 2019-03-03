@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="app" ng-cloak>
 <head>
   <meta charset="utf-8">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,7 +31,7 @@
   <script src="js/jquery.jplayer.min.js"></script>
 </head>
 
-<body ng-controller="networkController" style="background:url(images/bg.png)" has-bouncing="false" class="has-header has-subheader">    
+<body ng-controller="networkController" style="background:url(images/bg.png);background-color:#000" has-bouncing="false" class="has-header has-subheader">    
   <div id="radio" ng-controller="radioController" >
     <ons-toolbar>
       <div class="left">
@@ -72,7 +72,7 @@
           <ons-col width="70%" align="center">
           <ons-row align="center" id="controls">
               <ons-col width="35%" align="center"><!-- <a ng-attr-active="{{ ExibeFavoritar == true  }}" href="#" class="botoes curtir" ng-click="curtir('sim')"><span class="ion-thumbsup"></span></a> --></ons-col>
-              <ons-col width="30%" align="center"><a href="#" id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
+              <ons-col width="30%" align="center"><a id="btn-play" ng-click="startRadio()" ng-bind-html="renderHtml(buttonIcon)"><span class="ion-ios-play"></span></a></ons-col>
               <ons-col width="35%" align="center"><!-- <a ng-attr-active="{{ ExibeFavoritar == true }}" href="#" class="botoes descurtir" ng-click="descurtir('nao')"><span class="ion-thumbsdown"></span></a> --></ons-col>
             </ons-row>
             <div class="tocada" ng-if="radioOptions.ProximaMusica"><span class="seguida">Em seguida</span><span class="titulo">{{radioOptions.ProximaMusica}}</span><span class="artista">{{radioOptions.ProximaArtista}}</span></div>
@@ -118,7 +118,7 @@
   <ons-modal var="offlineMessage">
    Você está sem conexão com a internet.
   </ons-modal>
-   <ons-modal var="pedidos">
+   <ons-modal var="pedidos" style="display:none">
    <div style="text-align: center;padding:0 5%" id="pedidos">
     <div class="form">
     <h2>Peça sua música</h2>
