@@ -5,8 +5,8 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.redegazeta.app"
-        versionCode = "156"
-        version   = "156"
+        versionCode = "157"
+        version   = "157"
         >
     <name>Rede Gazeta MT</name>
 
@@ -19,7 +19,7 @@
     </author>
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-<string>2.1</string> 
+<string>2.2</string> 
 </gap:config-file> 
 
     <!--
