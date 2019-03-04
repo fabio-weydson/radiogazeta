@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<!--Android
+<!--Android-->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.phonegap.gazetafm"
         versionCode = "157"
         version   = "157"
-        >-->
-<!--iOS-->
+        >
+<!--iOS
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.redegazeta.app"
         versionCode = "157"
         version   = "157"
-        >
+        >-->
     <name>Rede Gazeta MT</name>
 
     <description>
@@ -91,7 +91,7 @@
     <gap:plugin name="cordova-plugin-disable-ios11-statusbar" source="npm" />
     <gap:plugin name="cordova-plugin-statusbar" source="npm"  />
     <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" /> 
-    <gap:plugin name="cordova-plugin-background-mode" source="npm"/>
+    <gap:plugin spec="https://github.com/katzer/cordova-plugin-background-mode.git" source="git" />
     <gap:plugin name="cordova-plugin-geolocation" source="npm" />
 
 

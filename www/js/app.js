@@ -508,6 +508,7 @@
                        var texto = 'Clique para abrir o aplicativo.';
                     }
                     cordova.plugins.backgroundMode.configure({
+                        silent: false,
                         title:  $scope.radioOptions.Titulo,
                         text: texto
 
