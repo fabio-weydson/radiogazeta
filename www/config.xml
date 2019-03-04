@@ -6,16 +6,16 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.phonegap.gazetafm"
-        versionCode = "157"
-        version   = "157"
+        versionCode = "158"
+        version   = "158"
         >
 <!--iOS
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.redegazeta.app"
-        versionCode = "157"
-        version   = "157"
+        versionCode = "158"
+        version   = "158"
         >-->
     <name>Rede Gazeta MT</name>
 
@@ -28,7 +28,7 @@
     </author>
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-<string>2.2</string> 
+<string>2.3</string> 
 </gap:config-file> 
 
     <!--

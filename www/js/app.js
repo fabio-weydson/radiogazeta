@@ -510,10 +510,10 @@
                     cordova.plugins.backgroundMode.configure({
                         silent: false,
                         title:  $scope.radioOptions.Titulo,
-                        text: texto
+                        text: 'Clique para abrir o aplicativo.'
 
                     });
-                }, 5000);
+                }, 1000);
             }
                     StatusBar.styleBlackOpaque();
         });
