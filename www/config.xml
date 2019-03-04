@@ -91,7 +91,7 @@
     <gap:plugin name="cordova-plugin-disable-ios11-statusbar" source="npm" />
     <gap:plugin name="cordova-plugin-statusbar" source="npm"  />
     <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" /> 
-    <plugin spec="https://github.com/katzer/cordova-plugin-background-mode.git" source="git" />
+    <plugin spec="https://github.com/tushe/cordova-plugin-background-mode.git" source="git" />
     <gap:plugin name="cordova-plugin-geolocation" source="npm" />
 
 
