@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<!--Android-->
+<!--Android
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.phonegap.gazetafm"
         versionCode = "159"
         version   = "159"
-        >
-<!--iOS
+        >-->
+
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.redegazeta.app"
-        versionCode = "158"
-        version   = "158"
-        >-->
+        versionCode = "159"
+        version   = "159"
+        >
     <name>Rede Gazeta MT</name>
 
     <description>
