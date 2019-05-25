@@ -88,6 +88,7 @@
         if (!$scope.lastradio) {
             $scope.lastradio = 0;
         }
+
         $scope.radios_arr = [{
             id: '0',
             title: 'Cuiabá 99.9',
@@ -101,7 +102,7 @@
             menu: 'Alta Floresta',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:12575',
-             logo: 'logo_xx.png'
+            logo: 'logo_xx.png'
         }, {
             id: '2',
             title: 'Barra do Garças 96.1',
@@ -118,28 +119,34 @@
             logo: 'logo_xx.png'
         },{
             id: '4',
-            title: 'Tangará da Serra',
+            title: 'Tangará da Serra 98.9',
             menu: 'Tangara da Serra',
             icon: 'ion-ios7-calendar-outline',
             ip: 'paineldj4.com.br:9038/stream',
             logo: 'logo_xx.png'
         },{
             id: '5',
+            title: 'Alto Taquari 107.7',
+            menu: 'Alto Taquari',
+            icon: 'ion-ios7-calendar-outline',
+            ip: 'paineldj6.com.br:8205/stream',
+            logo: 'logo_xx.png'
+        },{
+            id: '6',
             title: 'Vila Real',
             menu: 'Vila Real',
             icon: 'ion-ios7-calendar-outline',
             ip: 'paineldj1.com.br:14175/stream',
             logo: '4.png'
-        }
-        , {
-            id: '6',
+        }, {
+            id: '7',
             title: 'Cultura FM',
             menu: 'Cultura FM',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:11260',
             logo: '5.png'
         }];
-
+       
         $scope.radioOptions = {
             Titulo: '',
             albumArt: 'images/radio/cover.png?v=3',
@@ -211,13 +218,14 @@
         
         $scope.$watch('proximaFaixa', function(newValue, oldValue) {
             if(newValue==oldValue) {
-               console.log('igual');
+               //console.log('igual');
             }    else {
-                console.log('diferente');
+                //console.log('diferente');
             }
         });
 
         $scope.mudaRadio = function(idRadio) {
+            
             // $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
             if(idRadio!=$scope.lastradio) {
                     //$window.location.reload();
@@ -233,7 +241,7 @@
             $scope.radioOptions.Artista = "";
             $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
             Player.jPlayer('stop');
-              if (($scope.lastradio == '4')||($scope.lastradio == '5')) {
+              if (($scope.lastradio == '6')||($scope.lastradio == '7')) {
                 var stream = {
                     title: $scope.radios_arr[idRadio].title,
                     mp3: 'http://' + $scope.radios_arr[idRadio].ip
