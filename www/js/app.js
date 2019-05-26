@@ -137,14 +137,14 @@
             menu: 'Vila Real',
             icon: 'ion-ios7-calendar-outline',
             ip: 'paineldj1.com.br:14175/stream',
-            logo: '4.png'
+            logo: '6.png'
         }, {
             id: '7',
             title: 'Cultura FM',
             menu: 'Cultura FM',
             icon: 'ion-ios7-calendar-outline',
             ip: 'sc4.dnip.com.br:11260',
-            logo: '5.png'
+            logo: '7.png'
         }];
        
         $scope.radioOptions = {
@@ -241,7 +241,7 @@
             $scope.radioOptions.Artista = "";
             $scope.radioOptions.Musica = $scope.radios_arr[idRadio].title;
             Player.jPlayer('stop');
-              if (($scope.lastradio == '6')||($scope.lastradio == '7')) {
+              if (($scope.lastradio == '4')||($scope.lastradio == '5')||($scope.lastradio == '6')) {
                 var stream = {
                     title: $scope.radios_arr[idRadio].title,
                     mp3: 'http://' + $scope.radios_arr[idRadio].ip
