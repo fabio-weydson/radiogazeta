@@ -19,3 +19,7 @@ ons-tabbar .tab-bar__item {
     min-width:100px;
 }
 
+.select-radios .radio-item[active=true] span {
+    color: #ffeb01;
+    font-weight: bold;
+}
